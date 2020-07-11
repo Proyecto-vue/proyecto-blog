@@ -1,6 +1,8 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import BlogGrid from "../views/blog-grid.vue";
+import BlogCreate from "../views/blog-create.vue";
 
 Vue.use(VueRouter);
 
@@ -9,6 +11,17 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path:"/blog/show",
+    name: "BlogGrid",
+    component: BlogGrid,
+  },
+  {
+    path:"/blog/create",
+    name: "BlogCreate",
+    component: BlogCreate,
+    props: true,
   },
   {
     path: "/about",
