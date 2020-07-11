@@ -1,19 +1,27 @@
 <template>
-  <div id="nav">
-    <nav>
-      <a id="nombre">Andrea</a>
-      <a id="fotoperfil"></a>
-      <a id="mas">+</a>
-      <a id="home">Home</a>
-      <a id="blogs">Blogs</a>
-    </nav>
-    <br />
-
-    <aside id="aside">
+  <div>
+    <div id="nav">
       <nav>
-        <a id="asideblog1"></a>
+        <a id="nombre">Andrea</a>
+        <a class="fotoperfil"></a>
+        <a id="mas">+</a>
+        <a id="home">Home</a>
+        <a id="blogs">Blogs</a>
       </nav>
-    </aside>
+    </div>
+
+    <div class="aside">
+      <div class="asidebox">
+        <a class="fotoaside"></a>
+        <a class="textoaside">Carla</a>
+        <p class="textoaside2">Lorem ipsum dolor sit amet, consectetur adipiscing</p>
+      </div>
+      <div class="asidebox"></div>
+      <div class="asidebox"></div>
+      <div class="asidebox"></div>
+      <div class="asidebox"></div>
+    </div>
+
     <div id="principal"></div>
   </div>
 </template>
@@ -29,132 +37,178 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-#principal {
+#principal[data-v-469af010] {
   position: absolute;
-  width: 1121px;
-  height: 659px;
-  left: 24px;
-  top: 105px;
+  width: 82%;
+  height: 100%;
+  left: 1%;
+  top: 13%;
   margin: auto;
   background: #000000;
   mix-blend-mode: normal;
   border-radius: 15px;
+  box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.5);
 }
 
 /* Rectangle 1 */
-#nav {
+#nav[data-v-469af010] {
   position: absolute;
   width: 100%;
-  height: 22px;
+  height: 1%;
   left: 0px;
   top: 0px;
   margin: auto;
   background: #000000;
   mix-blend-mode: normal;
 }
-
-#aside {
+.aside[data-v-469af010] {
   position: absolute;
-  width: 231px;
-  height: 853px;
-  left: 1188px;
-  top: 105px;
+  width: 15%;
+  height: 100%;
+  left: 84%;
+  top: 13%;
   margin: auto;
-  background: #000000;
+  background: #ffffff;
   mix-blend-mode: normal;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+  box-shadow: 8px 8px 18px #c4c4c4, -8px -8px 16px #ffffff;
+}
+.asidebox {
+  width: 84%;
+  height: 30%;
+  position: relative;
+  margin-top: 10%;
+  left: 6.5%;
+  margin-bottom: 3%;
+  background: #ffffff;
+  border-style: solid;
+  mix-blend-mode: normal;
   border-radius: 15px;
 }
 
 /* Home */
-#home {
+#home[data-v-469af010] {
   position: absolute;
-  width: 97px;
-  height: 42px;
-  left: 1205px;
-  top: 21px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 42px;
-
-  color: #ffed48;
-}
-
-/* Andrea */
-#nombre {
-  position: absolute;
-  width: 116px;
-  height: 42px;
-  left: 39px;
-  top: 21px;
-
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 36px;
-  line-height: 42px;
-
-  color: #ffffff;
-}
-#fotoperfil {
-  position: absolute;
-  width: 74px;
-  height: 69px;
-  left: 170px;
-  top: 8px;
-
-  background: #ffed48;
-  border-radius: 360px;
-}
-/* Blogs */
-#blogs {
-  position: absolute;
-  width: 91px;
-  height: 84px;
-  left: 1337px;
-  top: 21px;
+  width: 2%;
+  height: 1%;
+  left: 87%;
+  top: 5%;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
-  font-size: 36px;
-  line-height: 42px;
+  font-size: 1.5rem;
+  line-height: 3rem;
 
-  color: #ffed48;
+  color: #ffffff;
+}
+
+/* Andrea */
+#nombre[data-v-469af010] {
+  position: absolute;
+  width: 2%;
+  height: 1%;
+  left: 6%;
+  top: 5%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2rem;
+  line-height: 3.5rem;
+
+  color: #ffffff;
+}
+.fotoperfil {
+  position: absolute;
+  width: 4%;
+  height: 75%;
+  left: 1%;
+  top: 8%;
+
+  background: #ffde22;
+  border-radius: 360px;
+}
+
+.fotoaside {
+  position: absolute;
+  width: 23%;
+  height: 35%;
+  left: 4%;
+  top: 8%;
+
+  background: #ffde22;
+  border-radius: 360px;
+}
+/* Blogs */
+#blogs[data-v-469af010] {
+  position: absolute;
+  width: 2%;
+  height: 1%;
+  left: 81%;
+  top: 5%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1.5rem;
+  line-height: 3rem;
+
+  color: #ffffff;
 }
 
 /* + */
-#mas {
+#mas[data-v-469af010] {
   position: absolute;
-  width: 34px;
-  height: 39px;
-  left: 1145px;
-  top: 15px;
+  width: 2%;
+  height: 1%;
+  left: 77%;
+  top: 5%;
 
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
-  font-size: 48px;
-  line-height: 56px;
+  font-size: 1.5rem;
+  line-height: 3rem;
 
   color: #ffed48;
 
   mix-blend-mode: normal;
 }
-
-#asideblog1 {
+.textoaside[data-v-469af010] {
   position: absolute;
-  width: 208px;
-  height: 187px;
-  left: 1200px;
-  top: 117px;
+  width: 2%;
+  height: 1%;
+  left: 40%;
+  top: 8%;
 
-  background: #ffffff;
-  mix-blend-mode: normal;
-  border-radius: 15px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1rem;
+  line-height: 2rem;
+  text-align: center;
+
+  color: #000000;
+}
+
+.textoaside2[data-v-469af010] {
+  position: absolute;
+  width: 2%;
+  height: 1%;
+  left: 40%;
+  top: 8%;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 0.5rem;
+  line-height: 1rem;
+  text-align: center;
+
+  color: #000000;
 }
 </style>
 
