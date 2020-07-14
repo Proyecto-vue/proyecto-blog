@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import BlogGrid from "../views/blog-grid.vue";
 import BlogCreate from "../views/blog-create.vue";
+import UserLogIn from "@/views/user-login.vue";
 
 Vue.use(VueRouter);
 
@@ -11,6 +12,11 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home
+  },
+  {
+    path: "/login",
+    name: "UserLogIn",
+    component: UserLogIn
   },
   {
     path:"/blog/show",
