@@ -5,6 +5,9 @@ import BlogGrid from "../views/blog-grid.vue";
 import BlogCreate from "../views/blog-create.vue";
 import UserLogIn from "@/views/user-login.vue";
 
+
+const BlogDetails = () => import("@/views/blog-details.vue");
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -28,6 +31,15 @@ const routes = [
     name: "BlogCreate",
     component: BlogCreate,
     props: true,
+  },
+  {
+    path: "/view/:id",
+    name: "BlogDetails",
+    props: true,
+    component: BlogDetails,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/about",
