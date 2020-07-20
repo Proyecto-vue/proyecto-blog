@@ -26,7 +26,7 @@
       <div class="liston"></div>
       <h1 class="fuente2">Tu titulo</h1>
     </div>
-    <div class="comments">
+    <div id="caja1" class="comments">
       <h1 class="fuente1">Commments</h1>
     </div>
   </div>
@@ -36,15 +36,15 @@
 export default {
   name: "HelloWorld",
   props: {
-    msg: String
-  }
+    msg: String,
+  },
 };
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style>
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
-#principal[data-v-469af010] {
+#principal {
   position: absolute;
   width: 79%;
   height: 70%;
@@ -56,7 +56,6 @@ export default {
   /*border-radius: 15px; */
   box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.5);
 }
-
 .liston {
   background: #ecececff;
   width: 100%;
@@ -64,13 +63,7 @@ export default {
   top: 0%;
   background-image: url("../assets/rect833.png");
 }
-
 .comments {
-  position: absolute;
-  width: 79%;
-  height: 30%;
-  left: 3%;
-  top: 90%;
   margin: auto;
   background: #ffffff;
   mix-blend-mode: normal;
@@ -78,8 +71,16 @@ export default {
   box-shadow: 2px 2px 9px rgba(0, 0, 0, 0.3);
 }
 
+#caja1 {
+  position: absolute;
+  left: 3%;
+  top: 90%;
+  width: 79%;
+  height: 30%;
+}
+
 /* Rectangle 1 */
-#nav[data-v-469af010] {
+#nav {
   position: absolute;
   width: 100%;
   height: 1%;
@@ -89,7 +90,7 @@ export default {
   background: #000000;
   mix-blend-mode: normal;
 }
-.aside[data-v-469af010] {
+.aside {
   position: absolute;
   width: 13%;
   height: 100%;
@@ -115,38 +116,32 @@ export default {
   mix-blend-mode: normal;
   /*border-radius: 15px; */
 }
-
 /* Home */
-#home[data-v-469af010] {
+#home {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 87%;
   top: 5%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 1.5rem;
   line-height: 3rem;
-
   color: #ffffff;
 }
-
 /* Andrea */
-#nombre[data-v-469af010] {
+#nombre {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 6%;
   top: 5%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 2rem;
   line-height: 3.5rem;
-
   color: #ffffff;
 }
 .fotoperfil {
@@ -155,90 +150,75 @@ export default {
   height: 75%;
   left: 1%;
   top: 8%;
-
   background: #ffde22;
   border-radius: 360px;
 }
-
 .fotoaside {
   position: absolute;
   width: 23%;
   height: 35%;
   left: 4%;
   top: 8%;
-
   background: #ffde22;
   border-radius: 360px;
 }
 /* Blogs */
-#blogs[data-v-469af010] {
+#blogs {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 81%;
   top: 5%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 1.5rem;
   line-height: 3rem;
-
   color: #ffffff;
 }
-
 /* + */
-#mas[data-v-469af010] {
+#mas {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 77%;
   top: 5%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: 300;
   font-size: 1.5rem;
   line-height: 3rem;
-
   color: #ffed48;
-
   mix-blend-mode: normal;
 }
-.textoaside[data-v-469af010] {
+.textoaside {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 40%;
   top: 8%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: bold;
   font-size: 1rem;
   line-height: 2rem;
   text-align: center;
-
   color: #000000;
 }
-
-.textoaside2[data-v-469af010] {
+.textoaside2 {
   position: absolute;
   width: 2%;
   height: 1%;
   left: 40%;
   top: 8%;
-
   font-family: Roboto;
   font-style: normal;
   font-weight: normal;
   font-size: 0.5rem;
   line-height: 1rem;
   text-align: center;
-
   color: #000000;
 }
-
 .fuente1 {
   font-family: "Sora", sans-serif;
   font-size: 1.5rem;
