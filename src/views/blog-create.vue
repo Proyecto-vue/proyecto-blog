@@ -88,7 +88,7 @@ export default {
     
     methods:{
         showPreview(){
-            if(this.title!='' || this.content!='' || this.tagsList!='' || this.category!=""){
+            if(this.title!='' && this.content!='' && this.tagsList!='' && this.category!=""){
             
             let array = this.tagsList.split(',');
             this.tags= array;
@@ -111,6 +111,7 @@ export default {
                     Content: this.content,
                     Tags: this.tags,
                     Category: this.category,
+                    userId: firebase.auth().currentUser.uid
                 })
             } catch (error) {
                 console.log(error);

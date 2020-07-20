@@ -27,7 +27,7 @@
                   <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
                 </svg>
      </router-link>
-     
+     <button class="dropdown-item" @click="logOut">Log Out</button>
     </div>
   </li>
   <li class="nav-item">
@@ -42,6 +42,35 @@
 
   </div>
 </template>
+
+
+
+<script>
+import firebase from "./common/firebase_setup";
+export default {
+  created(){
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.$store.commit("setUser",{ uid:user.uid})
+      }else{
+        this.$store.commit("setUser",null)
+      }
+    })
+  },
+  methods: {
+    async logOut() {
+      try {
+        await firebase.auth().signOut();
+        this.$router.push({ name: "UserLogIn" });
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
+
+}
+</script>
+
 
 <style lang="scss" scoped>
 #app {

@@ -11,12 +11,14 @@
       <br />
       <p>{{ blogSelected.Content }}</p>
       <br />
-      <p>{{ blogSelected.Tags }}</p>
-      </div>
+      <div class="d-flex flex-row justify-content-center">
+          <div class="tagList m-1" v-for="tagSelected in blogSelected.Tags" :key="tagSelected.id">
+            <router-link :to="/tags/ + tagSelected" class="btn btn-primary">{{tagSelected}}</router-link>
+          </div> 
+      </div>      </div>
 
 <!-- Sidebar -->
       <div class="sidebar col-4">
-        <h2>En la misma categoria ...</h2>
         <div class="sidebarcont" v-for="blog in blogs" :key="blog.id">
         <div class="innerSidebarDiv py-2">
         <h3>{{blog.Title}}</h3>
@@ -72,7 +74,11 @@ export default {
         result.forEach((doc) => {
           const r = doc.data();
           r.id = doc.id;
-          this.blogs.push(r);
+          if(r.id!=this.id){
+              this.blogs.push(r);
+          }else{
+            return;
+          }
         });
       } catch (error) {
         console.log(error);
@@ -93,7 +99,7 @@ export default {
    box-shadow: 1px 3px 5px #bbb;
 }
 .sidebar{
-  background-color: #fff;
+  background-color: #f5f5f5;
   .h2{
     text-shadow: 1px 2px 5px #bbb;
   }
@@ -103,5 +109,17 @@ export default {
     border-radius: 5px;
    box-shadow: 1px 3px 5px #bbb;
   }
+
+  .btn{
+        background-color: white;
+        color:teal;
+        border: solid 1.2px teal;
+
+        &:hover,&:focus{
+        background-color: teal;
+        color:white;
+        border: solid 0.5px white;
+        }
+    }
 }
 </style>

@@ -7,6 +7,7 @@ import UserLogIn from "@/views/user-login.vue";
 
 
 const BlogDetails = () => import("@/views/blog-details.vue");
+const BlogTags = () => import("@/views/blog-tags.vue");
 
 Vue.use(VueRouter);
 
@@ -14,29 +15,50 @@ const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: Home,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
     name: "UserLogIn",
-    component: UserLogIn
+    component: UserLogIn,
+    meta: {
+      requiresAuth: false,
+    },
   },
   {
     path:"/blog/show",
     name: "BlogGrid",
     component: BlogGrid,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path:"/blog/create",
     name: "BlogCreate",
     component: BlogCreate,
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/view/:id",
     name: "BlogDetails",
     props: true,
     component: BlogDetails,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/tags/:tagSelected",
+    name: "BlogTags",
+    props: true,
+    component: BlogTags,
     meta: {
       requiresAuth: true,
     },
