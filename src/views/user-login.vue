@@ -26,20 +26,8 @@
           v-model="password"
         />
       </div>
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click.prevent="authenticate"
-      >
-        LOGIN
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click.prevent="authenticate"
-      >
-        REGISTRARSE
-      </button>
+      <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
+      <button type="button" class="btn btn-primary" @click="$router.push('Registro')">REGISTRARSE</button>
     </form>
   </div>
 </template>
@@ -51,7 +39,7 @@ export default {
   data() {
     return {
       email: "",
-      password: "",
+      password: ""
     };
   },
   methods: {
@@ -64,8 +52,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

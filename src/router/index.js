@@ -6,6 +6,7 @@ import Home from "@/views/Home.vue";
 const BlogGrid = () => import("@/views/blog-grid.vue");
 const BlogCreate = () => import("@/views/blog-create.vue");
 const UserLogIn = () => import("@/views/user-login.vue");
+const Registro = () => import("@/views/Registro.vue");
 
 Vue.use(VueRouter);
 
@@ -45,6 +46,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  },
+  {
+    path: "/registro",
+    name: "Registro",
+    component: Registro,
   },
 ];
 
