@@ -1,0 +1,95 @@
+@import "./vue-variables";
+.vue-btn-one{
+    background-color: white;
+    color: $color-one;
+    border: solid 1px $color-two;
+    padding: 1em;
+    border-radius: 5px;
+    &:hover{
+        text-decoration: none;
+        color: white;
+        background-color: $color-two;
+    }
+}
+
+.vue-btn-two{
+    background-color: white;
+    color: $color-one;
+    border: solid 1px $c2-75;
+    padding: 1em;
+    border-radius: 5px;
+    scale:1;
+    transition-duration: 600ms;
+    &:hover{
+        text-decoration: none;
+        color: $color-one;
+        background-color: $c2-75;
+        padding: 1.2em;
+        
+    }
+}
+
+.vue-link{
+    color: $color-three;
+    padding: 1em;
+
+    &:hover,&:focus{
+        text-decoration: none;
+        color: $c3-75;
+    }
+}
+
+.vue-btn-three{
+    background: white;
+    color: $color-one;
+    border: solid 1px $color-one;
+    padding: 1em;
+    border-radius: 0.5em;
+    scale:1;
+    transition-duration: 800ms;
+    &:hover{
+        text-decoration: none;
+        color: white;
+        background: $cl-12-right;
+        padding: 1.2em;
+        border: solid 1px white;
+        border-radius: 0.8em;
+
+    }
+}
+
+.vue-btn-four{
+    background: $cl-12-right;
+    color: white;
+    border: solid 1px white;
+    padding: 1em;
+    border-radius: 0.5em;
+    scale:1;
+    transition-duration: 800ms;
+    &:hover{
+        text-decoration: none;
+        color: white;
+        background: $cl-12-left;
+        padding: 1.2em;
+        border: solid 1px white;
+        border-radius: 0.8em;
+
+    }
+}
+
+
+.vue-btn-five{
+    background-color: $color-two;
+    color: #fff;
+    border: solid 1px $c2-75;
+    padding: 1em;
+    border-radius: 5px;
+    scale:1;
+    transition-duration: 600ms;
+    &:hover{
+        text-decoration: none;
+        padding: 1.2em;
+        color: #fff;
+        background-color: $color-two;
+    }
+}

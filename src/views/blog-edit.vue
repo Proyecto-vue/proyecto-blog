@@ -1,8 +1,8 @@
 <template>
-    <div class="blogCreate mt-4">
+    <div class="blogEdit">
         <div class="d-flex flex-row justify-content-center">
 <!-- Make Post         -->
-        <div class="makePost col-7 mt-4" v-if="this.Pshown!=true">
+        <div class="makePost col-7 mx-auto mt-4" v-if="this.Pshown!=true">
          <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">Title</span>
@@ -19,18 +19,20 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Tags:</span>
         </div>
-        <input type="text" class="col-10" aria-label="Tags" v-model.lazy="tagsList"/>
+        <input type="text" class="col-10" aria-label="Tags" placeholder="Separar, con, comas, cada, tag" v-model.lazy="tagsList"/>
         </div>
         <div class="input-group file-div">
             <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroupFileAddon03" >Imagen</span>
             </div>
            <div class="custom-file">
-            <input id="inputGroupFile01" type="file" class="custom-file-input " ref="blogPic" />
-            <label class="custom-file-label col-12 mr-2" for="inputGroupFile01"></label>
-           </div>
+          <input id="inputGroupFile01" type="file" class="custom-file-input " lang="es" />
+          <label class="custom-file-label col-12 mr-2" for="inputGroupFile01"></label>
         </div>
-        <div class="input-group">
+        
+           
+        </div>
+        <div class="input-group" >
         <div class="input-group-prepend">
             <span class="input-group-text">Category</span>
         </div>
@@ -40,7 +42,6 @@
         <option value="Technology">Technology</option>
         <option value="Daily Life">Daily Life</option>
         <option value="Other">Other</option>
-        <option value="Other">Test</option>
         </select>
         </div>
         
@@ -54,9 +55,6 @@
          <div class="title">
           <h1>{{title}}</h1>
          </div>
-          <div class="imageDiv">
-        <img id="blogImg" class="col-12">
-          </div>
          <div class="content">
           <p>{{content}}</p>
          </div>
@@ -71,7 +69,7 @@
         <div class="btn-group-vertical col-2" role="group" aria-label="Options">
         <button type="button" class="vue-btn-five" @click.prevent="showPreview"  v-if="this.Pshown!=true">Preview</button>
         <button type="button" class="vue-btn-five"  @click.prevent="showEdit"  v-if="this.Pshown!=false">Edit</button>
-        <button type="button" class="vue-btn-five" @click.prevent="addToDB">Post</button>
+        <button type="button" class="vue-btn-five" @click.prevent="updateToDB">Post</button>
         </div>
         </div>
      
@@ -83,34 +81,61 @@
 
 
 <script>
+
 import firebase from "@/common/firebase_setup";
-const storage = firebase.storage().ref();
 const db = firebase.firestore();
 
-
 export default {
+    props:{
+        id:{
+            type:String,
+        }
+    },
     name: "BlogCreate",
     data(){
         return{
             title:'',
             content:'',
             tagsList:'',
-            id:'',
             tags:[],
             category:'',
             Pshown: false,
             Eshown:true,
         }
     },
+
+
+    created(){
+    this.getblog();
     
+    },   
+
     methods:{
-        showPreview(){
+        async getblog() {
+      try {
+       const t = new Date();
+        const result = await db.doc(`blogs/${this.id}`).get();
+        const useres = result.data();
+        this.title = useres.Title;
+        this.category = useres.Category;
+        this.content= useres.Content;
+        this.tags= useres.Tags;
+        this.tagsList = this.tags.toString()
+        db.doc(`blogs/${this.id}`).update({
+         modified: t.toLocaleTimeString(),
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      
+    },
+
+    showPreview(){
             if(this.title!='' && this.content!='' && this.tagsList!='' && this.category!=""){
             
             let array = this.tagsList.split(',');
             this.tags= array;
         
-            
             this.Pshown = true;
             }else{
                 alert("Please fill everything.")
@@ -121,22 +146,20 @@ export default {
                 this.Pshown = false;
         },
 
-        async addToDB(){
+        async updateToDB(){
             try {
-                console.log( db.collection("blogs"));
-                let array = this.tagsList.split(',');
+            let array = this.tagsList.split(',');
             this.tags= array;
-               const data = await db.collection("blogs").add({
+        
+                console.log( db.collection("blogs"));
+              await db.collection("blogs").doc(this.id).update({
                     Title: this.title,
                     Content: this.content,
                     Tags: this.tags,
                     Category: this.category,
-                    userId: firebase.auth().currentUser.uid,
-                })
-                    this.id=data.id;
-                    const imgFile = this.$refs.blogPic.files[0];
-                    await storage.child("images/" + data.id + ".jpg").put(imgFile);
-                    
+                    userId: firebase.auth().currentUser.uid
+                });
+            this.$router.push({name:"BlogDetails", props:{id:this.id}})
             } catch (error) {
                 console.log(error);
             }
@@ -152,12 +175,28 @@ export default {
     background-color: white;
     min-height: 40vh;
     box-shadow: 3px 2px 5px #bbbbbb50;
+
+
+}
+.file-div{
+.file-input{
+    opacity: 0;
+    visibility: hidden;
+}
+
+#inputGroupFile01{
+    opacity:0;
+    content: "ffff";
+}
+
+.custom-file-label{
+   overflow: hidden;
+}
 }
 
 .vue-btn-five{
-    margin-top:1em;
-    margin-left: 1em;
-    width:15vw;
+    width: 15vw;
+    margin: 1em;
+    padding: 1em;
 }
-
 </style>

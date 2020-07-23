@@ -46,8 +46,12 @@
 
 
 <script>
+import  bsCustomFileInput from 'bs-custom-file-input'
 import firebase from "./common/firebase_setup";
 export default {
+  updated(){
+    bsCustomFileInput.init()
+ },
   created(){
     firebase.auth().onAuthStateChanged((user)=>{
       if(user){

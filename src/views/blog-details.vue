@@ -2,6 +2,7 @@
   <div>
     <div class="container text-left">
       <router-link to="/" class="btn btn-primary">Back</router-link>
+       <router-link v-if="sameuser" :to="/edit/ + id" class="btn btn-primary">Edit</router-link>
     </div>
 
     <div class="container d-flex justify-content-between">
@@ -9,6 +10,9 @@
       <div class="main col-7">
       <h1>{{ blogSelected.Title }}</h1>
       <br />
+      <div class="imageDiv">
+        <img id="blogImg" class="col-12">
+      </div>
       <p>{{ blogSelected.Content }}</p>
       <br />
       <div class="d-flex flex-row justify-content-center">
@@ -33,7 +37,10 @@
 
 <script>
 import firebase from "../common/firebase_setup";
+const storage = firebase.storage();
 const db = firebase.firestore();
+
+
 export default {
   name: "blogDetails",
   props: ["id"],
@@ -42,23 +49,37 @@ export default {
       blogSelected: {},
       blogs:[],
       category:"",
+      sameuser: false,
     }
   },
   created() {
+   
     this.getblog();
+    
   },
   
   methods: {
     async getblog() {
       try {
-       // const t = new Date();
+       
         const result = await db.doc(`blogs/${this.id}`).get();
         this.blogSelected = result.data();
         this.category = result.data().Category;
-        console.log(this.category);
-        // db.doc(`blogs/${this.id}`).update({
-        //   modified: t.toLocaleTimeString(),
-        // });
+        
+        
+        // Image
+          var pathReference = storage.ref(`images/${this.id}.jpg`);
+       pathReference.getDownloadURL().then(function(url) {
+      var img = document.getElementById('blogImg');
+      img.src = url;
+      }).catch(function(error) {
+        console.log(error);
+      });
+
+          if(firebase.auth().currentUser.uid == this.blogSelected.userId){
+              this.sameuser= true;
+          }
+
         this.getSimilarBlogs();
       } catch (error) {
         console.log(error);
