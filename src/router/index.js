@@ -1,5 +1,5 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
+import Router from "vue-router";
 import Home from "@/views/Home.vue";
 //import firebase from "../common/firebase_setup";
 
@@ -8,7 +8,7 @@ const BlogCreate = () => import("@/views/blog-create.vue");
 const UserLogIn = () => import("@/views/user-login.vue");
 const Registro = () => import("@/views/Registro.vue");
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
 const routes = [
   {
@@ -48,30 +48,15 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/registro",
+    path: "/Registro",
     name: "Registro",
     component: Registro,
   },
 ];
 
-/*router.beforeEach((to, from, next) => {
-  const isAuth = firebase.auth().currentUser != null;
-  // Revisar que permisos necesita cada ruta
-  if (!isAuth && to.meta.requiresAuth) {
-    next({
-      name: "user-login",
-    });
-  } else if (isAuth && !to.meta.requiresAuth) {
-    next({
-      name: "Home",
-    });
-  } else {
-    // si no tiene ninguna regla solo pasar a la ruta
-    next();
-  }
-}); */
-
-const router = new VueRouter({
+const router = new Router({
+  mode: "history",
+  base: process.env.BASE_URL,
   routes,
 });
 

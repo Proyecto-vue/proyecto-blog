@@ -1,7 +1,10 @@
 <template>
-  <div id="caja2" class="comments">
-    <form class="col-7 mx-auto">
-      <h1>Log-In</h1>
+  <form>
+    <div id="caja2" class="comments">
+      <div v-if="error" class="alert alert-danger">{{error}}</div>
+
+      <h1 class="fuente2">Login</h1>
+      <br />
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Email</span>
@@ -16,20 +19,28 @@
       </div>
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="passtext">password</span>
+          <span class="input-group-text" id="passtext">Password</span>
         </div>
         <input
           type="password"
           name="password"
           id="password"
+          class="form-control"
           aria-describedby="passtext"
           v-model="password"
         />
       </div>
+      <br />
       <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
-      <button type="button" class="btn btn-primary" @click="$router.push('Registro')">REGISTRARSE</button>
-    </form>
-  </div>
+      &ensp;
+      &emsp;
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="$router.push('Registro')"
+      >REGISTRARSE</button>
+    </div>
+  </form>
 </template>
 
 <script>
@@ -39,7 +50,8 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      error: null
     };
   },
   methods: {
@@ -48,9 +60,10 @@ export default {
         await firebase
           .auth()
           .signInWithEmailAndPassword(this.email, this.password);
-        this.$router.push({ name: "Home" });
+        this.$router.push("/");
       } catch (error) {
         console.log(error);
+        this.error = error.message;
       }
     }
   }
@@ -63,6 +76,16 @@ export default {
   top: 15%;
   left: 37%;
   width: 30%;
-  height: 40%;
+  height: 50%;
+}
+
+.input-group-text {
+  background-color: rgb(169, 196, 255);
+  margin-left: 14%;
+}
+
+.form-control {
+  margin-right: 4%;
+  left: 1.8%;
 }
 </style>
