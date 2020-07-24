@@ -1,0 +1,27 @@
+@import "./vue-variables";
+
+.c3-text {
+  color: $color-three;
+}
+
+.Ss-text {
+  font-family: sans-serif;
+  &::first-letter {
+    font-family: serif;
+    text-transform: uppercase;
+  }
+}
+
+.CapAll {
+  text-transform: capitalize;
+}
+
+.font-ss {
+  font-family: sans-serif;
+  font-size: 1rem;
+}
+
+.font-s {
+  font-family: serif;
+  font-size: 1rem;
+}

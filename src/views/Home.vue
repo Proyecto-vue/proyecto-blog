@@ -24,7 +24,7 @@
 
     <div id="principal">
       <div class="liston"></div>
-      <h1 class="fuente2">Tu titulo</h1>
+      <h1 class="fuente2">{{ user.name }}</h1>
     </div>
     <div id="caja1" class="comments">
       <h1 class="fuente1">Commments</h1>
@@ -33,14 +33,74 @@
 </template>
 
 <script>
+import firebase from "../common/firebase_setup";
+const db = firebase.firestore();
+//import { mapGetters } from "vuex";
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
+
 export default {
-  name: "Home"
+  name: "Home",
+  data() {
+    return {
+      user: {
+        name: "",
+        email: "",
+        uid: "",
+      },
+      blogs: [],
+    };
+  },
+  created() {
+    this.getBlogs();
+    this.getUsuario();
+  },
+  methods: {
+    getUsuario() {
+      var user = firebase.auth().currentUser;
+      if (user != null) {
+        this.user.name = user.displayName;
+        this.user.email = user.email;
+        this.user.uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+      }
+    },
+
+    async getBlogs() {
+      try {
+        // Obtener la lista de documentos.
+        const result = await db
+          .collection("blogs")
+          // .where("category", "==", "cocina italiana")
+          .get();
+
+        // Reiniciar arreglo de recetas.
+        this.blogs = [];
+
+        // Recorrer la lista para agregar la data
+        // al arreglo local de recetas.
+        result.forEach((doc) => {
+          const r = doc.data();
+          r.id = doc.id;
+
+          this.blogs.push(r);
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+    /* computed: {
+      // map `this.user` to `this.$store.getters.user`
+      ...mapGetters({
+        user: "user",
+      }),
+    }, */
+  },
 };
 </script>
 
-<style >
+<style>
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
 #principal {
   position: absolute;

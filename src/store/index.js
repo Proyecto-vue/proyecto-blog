@@ -1,28 +1,46 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import router from "../router/index";
-import * as firebase from "..//common/firebase_setup";
+//import router from "../router/index";
+//import * as firebase from "..//common/firebase_setup";
+
+//import { firestore } from "firebase";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
     userProfile: {},
+    user: {
+      data: null,
+      name: "",
+      email: "",
+      password: "",
+    },
+    blogs: [],
   },
   mutations: {
+    setBlogs(state, val) {
+      state.blogs = val;
+    },
+
     setUser: (state, payload) => {
       if (payload.uid == null) {
         return;
       }
 
       state.user = payload;
+      state.user.data = payload;
     },
   },
   getters: {
     isAuthenticated(state) {
+      state.user.data = state.user;
       return state.user != null;
     },
 
+    user(state) {
+      return state.user;
+    },
     setUserProfile(state, val) {
       state.userProfile = val;
     },
@@ -44,7 +62,18 @@ export default new Vuex.Store({
       dispatch("fetchUserProfile", user);
     }, */
 
-    async fetchUserProfile({ commit }, user) {
+    fetchUser({ commit }, user) {
+      if (user) {
+        commit("setUser", {
+          displayName: user.displayName,
+          email: user.email,
+        });
+      } else {
+        commit("setUser", null);
+      }
+    },
+
+    /* async fetchUserProfile({ commit }, user) {
       // fetch user profile
       const userProfile = await firebase.usersCollection.doc(user.uid).get();
 
@@ -53,7 +82,7 @@ export default new Vuex.Store({
 
       // change route to dashboard
       router.push("/");
-    },
+    }, */
   },
   modules: {},
 });

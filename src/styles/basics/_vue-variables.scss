@@ -1,0 +1,17 @@
+$color-one: #008080;
+$color-two: #94e9be;
+$color-three: #fb8500;
+$color-four: #bbb;
+$color-five: #424242;
+
+// 75% Opacity
+$c1-75: #00808075;
+$c2-75: #94e9be75;
+$c3-75: #fb850075;
+$c4-75: #bbbbbb75;
+$c5-75: #1b1b1b75;
+
+//color gradients
+$cl-12-top: linear-gradient(to top, $color-one, $color-two);
+$cl-12-right: linear-gradient(-45deg, $c1-75, $c2-75);
+$cl-12-left: linear-gradient(45deg, $c1-75, $c2-75);

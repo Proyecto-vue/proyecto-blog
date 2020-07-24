@@ -15,12 +15,11 @@
 import blogCard from "../components/blog-card.vue";
 import firebase from "../common/firebase_setup";
 const db = firebase.firestore();
-
 export default {
   data() {
     return {
       blogs: [],
-      details: ""
+      details: "",
     };
   },
   created() {
@@ -28,24 +27,22 @@ export default {
     console.log(this.blogs);
   },
   components: {
-    "blog-card": blogCard
+    "blog-card": blogCard,
   },
   methods: {
     async getBlogs() {
       try {
         const res = await db.collection("blogs").get();
-
-        res.forEach(blog => {
+        res.forEach((blog) => {
           const p = blog.data();
           p.id = blog.id;
-
           this.blogs.push(p);
         });
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="scss" scoped>

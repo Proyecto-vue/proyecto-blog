@@ -1,7 +1,7 @@
 <template>
   <form>
     <div id="caja2" class="comments">
-      <div v-if="error" class="alert alert-danger">{{error}}</div>
+      <div v-if="error" class="alert alert-danger">{{ error }}</div>
 
       <h1 class="fuente2">Login</h1>
       <br />
@@ -31,15 +31,23 @@
         />
       </div>
       <br />
-      <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click.prevent="authenticate"
+      >
+        LOGIN
+      </button>
       <br />
       <br />
       <button
         type="button"
         id="boton-registro"
         class="btn btn-primary"
-        @click="$router.push('Registro')"
-      >REGISTRARSE</button>
+        @click="$router.push('/Registro')"
+      >
+        REGISTRARSE
+      </button>
     </div>
   </form>
 </template>
@@ -52,7 +60,7 @@ export default {
     return {
       email: "",
       password: "",
-      error: null
+      error: null,
     };
   },
   methods: {
@@ -66,8 +74,8 @@ export default {
         console.log(error);
         this.error = error.message;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 

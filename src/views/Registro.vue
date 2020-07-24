@@ -1,26 +1,30 @@
 <template>
   <form>
     <div id="caja3" class="comments">
-      <div v-if="error" class="alert alert-danger">{{error}}</div>
-      <div v-if="mensaje" class="alert alert-success">{{mensaje}}</div>
+      <div v-if="error" class="alert alert-danger">{{ error }}</div>
+      <div v-if="mensaje" class="alert alert-success">{{ mensaje }}</div>
       <h1 class="fuente1">FORMA DE REGISTRO</h1>
       <br />
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="nombre" class="input-group-text" id="basic-addon3">Nombre</span>
+          <span for="nombre" class="input-group-text" id="basic-addon3"
+            >Nombre</span
+          >
         </div>
         <input
           type="text"
           class="form-control"
           id="basic-url"
           aria-describedby="basic-addon3"
-          v-model.trim="form.nombre"
+          v-model.trim="form.name"
         />
       </div>
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="email" class="input-group-text" id="basic-addon3">Email</span>
+          <span for="email" class="input-group-text" id="basic-addon3"
+            >Email</span
+          >
         </div>
         <input
           type="text"
@@ -33,7 +37,9 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="password" class="input-group-text" id="passtext">password</span>
+          <span for="password" class="input-group-text" id="passtext"
+            >password</span
+          >
         </div>
         <input
           type="password"
@@ -44,9 +50,17 @@
         />
       </div>
       <br />
-      <button type="button" class="btn btn-primary" @click="$router.push('/login')">VOLVER AL LOGIN</button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        @click="$router.push('/login')"
+      >
+        VOLVER
+      </button>
       &emsp;&emsp;
-      <button type="button" class="btn btn-primary" @click="submit()">TODO LISTO</button>
+      <button type="button" class="btn btn-primary" @click="submit()">
+        TODO LISTO
+      </button>
     </div>
   </form>
 </template>
@@ -60,10 +74,10 @@ export default {
       form: {
         email: "",
         password: "",
-        nombre: ""
+        nombre: "",
       },
       error: null,
-      mensaje: null
+      mensaje: null,
     };
   },
   methods: {
@@ -71,19 +85,19 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then(data => {
+        .then((data) => {
           data.user
             .updateProfile({
-              displayName: this.form.name
+              displayName: this.form.name,
             })
             .then(() => {});
           this.mensaje = "Registrado exitosamente";
         })
-        .catch(err => {
+        .catch((err) => {
           this.error = err.message;
         });
-    }
-  }
+    },
+  },
 };
 </script>
 

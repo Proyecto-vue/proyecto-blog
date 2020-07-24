@@ -8,6 +8,10 @@ const BlogCreate = () => import("@/views/blog-create.vue");
 const UserLogIn = () => import("@/views/user-login.vue");
 const Registro = () => import("@/views/Registro.vue");
 
+const BlogDetails = () => import("@/views/blog-details.vue");
+const BlogEdit = () => import("@/views/blog-edit.vue");
+const BlogTags = () => import("@/views/blog-tags.vue");
+
 Vue.use(Router);
 
 const routes = [
@@ -40,6 +44,42 @@ const routes = [
     name: "BlogCreate",
     component: BlogCreate,
     props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/blog/create",
+    name: "BlogCreate",
+    component: BlogCreate,
+    props: true,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/edit/:id",
+    name: "BlogEdit",
+    props: true,
+    component: BlogEdit,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/view/:id",
+    name: "BlogDetails",
+    props: true,
+    component: BlogDetails,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/tags/:tagSelected",
+    name: "BlogTags",
+    props: true,
+    component: BlogTags,
     meta: {
       requiresAuth: true,
     },
