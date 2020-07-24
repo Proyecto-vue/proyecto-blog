@@ -2,7 +2,7 @@
   <div id="app">
     <div class="d-flex justify-content-between divNAV">
       <div class="wp-title pl-2">
-        <h3>BlogName</h3>
+        <h3>Blog name</h3>
       </div>
       <div class="nav-wrap">
         <ul class="nav nav-pills">
@@ -10,22 +10,14 @@
             <router-link class="nav-link" to="/">Home</router-link>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-              >Pages</a
-            >
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Pages</a>
             <div class="dropdown-menu">
-              <router-link class="dropdown-item" to="/blog/create"
-                >Blog Create</router-link
-              >
-              <router-link class="dropdown-item" to="/blog/show"
-                >Blog Grid</router-link
-              >
+              <router-link class="dropdown-item" to="/blog/create">Blog Create</router-link>
+              <router-link class="dropdown-item" to="/blog/show">Blog Grid</router-link>
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-              >User</a
-            >
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">User</a>
             <div class="dropdown-menu">
               <router-link class="dropdown-item" to="/login">
                 <!-- Door Opening for LOGIN -->
@@ -45,15 +37,15 @@
                     fill-rule="evenodd"
                     d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"
                   />
-                  <path
-                    d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"
-                  />
+                  <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z" />
                 </svg>
               </router-link>
             </div>
           </li>
-          <li class="nav-item">
-            <router-link class="nav-link" to="/about">About</router-link>
+          <li>
+            <form>
+              <button type="submit" class="btn btn-link navbar-btn navbar-link">Log off</button>
+            </form>
           </li>
         </ul>
       </div>
@@ -66,8 +58,12 @@
 <script>
 import firebase from "./common/firebase_setup";
 import "firebase/auth";
+//import router from "./router";
 
 export default {
+  data() {
+    return {};
+  },
   created() {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
@@ -76,6 +72,13 @@ export default {
         this.$store.commit("setUser", null);
       }
     });
+  },
+  async logOut() {
+    try {
+      await firebase.auth().signOut();
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>

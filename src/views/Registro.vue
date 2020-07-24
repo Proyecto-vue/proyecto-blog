@@ -77,11 +77,11 @@ export default {
               displayName: this.form.name
             })
             .then(() => {});
+          this.mensaje = "Registrado exitosamente";
         })
         .catch(err => {
           this.error = err.message;
         });
-      this.mensaje = "Registrado exitosamente";
     }
   }
 };

@@ -15,11 +15,17 @@ const routes = [
     path: "/",
     name: "Home",
     component: Home,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/login",
     name: "UserLogIn",
     component: UserLogIn,
+    meta: {
+      requiresAuth: false,
+    },
   },
   {
     path: "/blog/show",
@@ -51,6 +57,9 @@ const routes = [
     path: "/Registro",
     name: "Registro",
     component: Registro,
+    meta: {
+      requiresAuth: false,
+    },
   },
 ];
 

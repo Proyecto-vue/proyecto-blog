@@ -32,10 +32,11 @@
       </div>
       <br />
       <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
-      &ensp;
-      &emsp;
+      <br />
+      <br />
       <button
         type="button"
+        id="boton-registro"
         class="btn btn-primary"
         @click="$router.push('Registro')"
       >REGISTRARSE</button>
@@ -87,5 +88,9 @@ export default {
 .form-control {
   margin-right: 4%;
   left: 1.8%;
+}
+
+#boton-registro {
+  background-color: rgb(79, 158, 0);
 }
 </style>
