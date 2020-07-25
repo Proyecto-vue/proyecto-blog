@@ -7,7 +7,8 @@
         </div>
         <div class="card-body">
           <p class="card-text">{{ details }}</p>
-          <a href="#" class="btn">See blog</a>
+           <router-link :to="/view/ + id" class="btn btn-primary"
+        >Ver Blog</router-link>
         </div>
       </div>
     </div>

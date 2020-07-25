@@ -11,16 +11,21 @@ Vue.config.productionTip = false;
 
 router.beforeEach((to, from, next) => {
   const isAuth = firebase.auth().currentUser != null;
+  console.log(isAuth);
+  console.log(to.meta.requiresAuth);
+  console.log(to.meta.public);
 
   // Revisar que permisos necesita cada ruta
   if (!isAuth && to.meta.requiresAuth) {
     next({
       name: "UserLogIn",
     });
-  } else if (isAuth && !to.meta.requiresAuth) {
+  } else if (isAuth && typeof to.meta.requiresAuth!="undefined" && !to.meta.requiresAuth ) {
     next({
       name: "Home",
     });
+  } else if(to.meta.public){
+    next();
   } else {
     // si no tiene ninguna regla solo pasar a la ruta
     next();

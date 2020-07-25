@@ -21,7 +21,7 @@ const routes = [
     name: "Home",
     component: Home,
     meta: {
-      requiresAuth: true,
+      public: true,
     },
   },
   {
@@ -37,16 +37,7 @@ const routes = [
     name: "BlogGrid",
     component: BlogGrid,
     meta: {
-      requiresAuth: true,
-    },
-  },
-  {
-    path: "/blog/create",
-    name: "BlogCreate",
-    component: BlogCreate,
-    props: true,
-    meta: {
-      requiresAuth: true,
+      public: true,
     },
   },
   {
