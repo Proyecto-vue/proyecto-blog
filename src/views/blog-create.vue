@@ -40,7 +40,7 @@
         <option value="Technology">Technology</option>
         <option value="Daily Life">Daily Life</option>
         <option value="Other">Other</option>
-        <option value="Other">Test</option>
+        <option value="Test">Test</option>
         </select>
         </div>
         
@@ -133,7 +133,7 @@ export default {
                     Tags: this.tags,
                     Category: this.category,
                     userId: firebase.auth().currentUser.uid,
-                    created:  t.toLocaleTimeString(),
+                    createdOn:  t,
                 })
                     this.id=data.id;
                     const imgFile = this.$refs.blogPic.files[0];
