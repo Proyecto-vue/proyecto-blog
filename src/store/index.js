@@ -17,6 +17,7 @@ export default new Vuex.Store({
       password: "",
     },
     blogs: [],
+    likes: "",
   },
   mutations: {
     setBlogs(state, val) {

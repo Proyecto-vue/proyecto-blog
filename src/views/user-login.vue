@@ -31,13 +31,7 @@
         />
       </div>
       <br />
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click.prevent="authenticate"
-      >
-        LOGIN
-      </button>
+      <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
       <br />
       <br />
       <button
@@ -45,9 +39,7 @@
         id="boton-registro"
         class="btn btn-primary"
         @click="$router.push('/Registro')"
-      >
-        REGISTRARSE
-      </button>
+      >REGISTRARSE</button>
     </div>
   </form>
 </template>
@@ -60,7 +52,7 @@ export default {
     return {
       email: "",
       password: "",
-      error: null,
+      error: null
     };
   },
   methods: {
@@ -74,8 +66,8 @@ export default {
         console.log(error);
         this.error = error.message;
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -10,31 +10,27 @@
       </nav>
     </div>-->
 
-    <div class="aside">
-      <div class="asidebox">
-        <a class="fotoaside"></a>
-        <a class="textoaside">Carla</a>
-        <p class="textoaside2"></p>
+    <!-- <div class="aside"> 
+      <div v-for="blog in blogs" :key="blog.Aside">
+        <div class="asidebox">
+         <a class="fotoaside"></a> 
+          <a class="textoaside">{{blog.Title}}</a>
+        </div>
       </div>
-      <div class="asidebox"></div>
-      <div class="asidebox"></div>
-      <div class="asidebox"></div>
-      <div class="asidebox"></div>
-    </div>
+    </div>-->
 
     <div id="principal">
       <div class="liston"></div>
-      <div v-for="blog in blogs" :key="blog.id">
+      <div v-for="blog in blogUnico" :key="blog.id">
         <h1 class="fuente2">{{ blog.Title }}</h1>
       </div>
-      <div v-for="blog in blogs" :key="blog.id" class="content">
+      <div v-for="blog in blogUnico" :key="blog.id+1" class="content">
         <p class="fuente1">{{ blog.Content }}</p>
       </div>
     </div>
     <div id="caja1" class="comments">
-      <!-- <div v-for="blog in blogs" :key="blog.id" > -->
-      <!-- <p class="fuente1">{{ blog.Comment }}</p> -->
-      <!-- </div> -->
+      <h1 id="fuenteFav">LIKES</h1>
+      <h1 id="numeroFav">4</h1>
     </div>
   </div>
 </template>
@@ -42,7 +38,7 @@
 <script>
 import firebase from "../common/firebase_setup";
 const db = firebase.firestore();
-//import { mapGetters } from "vuex";
+//import { mapS } from "vuex";
 // @ is an alias to /src
 //import HelloWorld from "@/components/HelloWorld.vue";
 
@@ -55,12 +51,18 @@ export default {
         email: "",
         uid: ""
       },
-      blogs: []
+      blogs: [],
+      limit: 1
     };
   },
   created() {
     this.getUsuario();
     this.getBlogs();
+  },
+  computed: {
+    blogUnico() {
+      return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
+    }
   },
   methods: {
     getUsuario() {
@@ -81,7 +83,6 @@ export default {
         const result = await db
           .collection("blogs")
           .where("userId", "==", this.user.uid)
-          .limit(1)
           .get();
 
         // Reiniciar arreglo de recetas.
@@ -99,24 +100,23 @@ export default {
         console.log(error);
       }
     }
-    /* computed: {
-      // map `this.user` to `this.$store.getters.user`
-      ...mapGetters({
-        user: "user",
-      }),
-    }, */
   }
 };
 </script>
 
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
+
+#contenedor {
+  min-height: 100%;
+}
+
 #principal {
   position: absolute;
   width: 79%;
-  height: 70%;
-  left: 3%;
-  top: 13%;
+  height: 80%;
+  left: 10%;
+  top: 9%;
   margin: auto;
   background: #ffffff;
   mix-blend-mode: normal;
@@ -130,10 +130,12 @@ export default {
   height: 5%;
   top: 0%;
   background-image: url("../assets/rect833.png");
+  position: sticky;
 }
 
 .content {
   text-align: left;
+  padding: 2%;
 }
 
 .comments {
@@ -146,10 +148,10 @@ export default {
 
 #caja1 {
   position: absolute;
-  left: 3%;
-  top: 90%;
+  left: 10%;
+  top: 92%;
   width: 79%;
-  height: 30%;
+  height: 5%;
 }
 
 /* Rectangle 1 */
@@ -299,5 +301,16 @@ export default {
 .fuente2 {
   font-family: "Sora", sans-serif;
   font-size: 2rem;
+}
+
+#fuenteFav {
+  text-align: left;
+  margin-left: 2%;
+}
+
+#numeroFav {
+  position: absolute;
+  top: 5%;
+  right: 3%;
 }
 </style>
