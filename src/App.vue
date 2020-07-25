@@ -66,17 +66,6 @@ export default {
   },
   updated(){
     bsCustomFileInput.init();
-
-    firebase.auth().onAuthStateChanged((user)=>{
-      if(user){
-        this.$store.commit("setUser",{ uid:user.uid})
-        this.$store.commit("setUserName",{ username:user.displayName})
-        this.username = firebase.auth().currentUser.displayName;
-        this.isAuth=true;
-      }else{
-        this.$store.commit("setUser",null)
-      }
-    })
  },
   created(){
     firebase.auth().onAuthStateChanged((user)=>{
