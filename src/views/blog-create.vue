@@ -13,51 +13,28 @@
           <div class="input-group-prepend">
             <span class="input-group-text">Content</span>
           </div>
-          <textarea
-            class="form-control"
-            aria-label="Content"
-            v-model.lazy="content"
-          ></textarea>
+          <textarea class="form-control" aria-label="Content" v-model.lazy="content"></textarea>
         </div>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Tags:</span>
           </div>
-          <input
-            type="text"
-            class="col-10"
-            aria-label="Tags"
-            v-model.lazy="tagsList"
-          />
+          <input type="text" class="col-10" aria-label="Tags" v-model.lazy="tagsList" />
         </div>
         <div class="input-group file-div">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroupFileAddon03"
-              >Imagen</span
-            >
+            <span class="input-group-text" id="inputGroupFileAddon03">Imagen</span>
           </div>
           <div class="custom-file">
-            <input
-              id="inputGroupFile01"
-              type="file"
-              class="custom-file-input "
-              ref="blogPic"
-            />
-            <label
-              class="custom-file-label col-12 mr-2"
-              for="inputGroupFile01"
-            ></label>
+            <input id="inputGroupFile01" type="file" class="custom-file-input" ref="blogPic" />
+            <label class="custom-file-label col-12 mr-2" for="inputGroupFile01"></label>
           </div>
         </div>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Category</span>
           </div>
-          <select
-            class="custom-select"
-            aria-label="Category"
-            v-model="category"
-          >
+          <select class="custom-select" aria-label="Category" v-model="category">
             <option selected>Select A Category</option>
             <option value="Food">Food</option>
             <option value="Technology">Technology</option>
@@ -97,20 +74,14 @@
           class="vue-btn-five"
           @click.prevent="showPreview"
           v-if="this.Pshown != true"
-        >
-          Preview
-        </button>
+        >Preview</button>
         <button
           type="button"
           class="vue-btn-five"
           @click.prevent="showEdit"
           v-if="this.Pshown != false"
-        >
-          Edit
-        </button>
-        <button type="button" class="vue-btn-five" @click.prevent="addToDB">
-          Post
-        </button>
+        >Edit</button>
+        <button type="button" class="vue-btn-five" @click.prevent="addToDB">Post</button>
       </div>
     </div>
   </div>
@@ -131,7 +102,7 @@ export default {
       tags: [],
       category: "",
       Pshown: false,
-      Eshown: true,
+      Eshown: true
     };
   },
 
@@ -166,7 +137,7 @@ export default {
           Content: this.content,
           Tags: this.tags,
           Category: this.category,
-          userId: firebase.auth().currentUser.uid,
+          userId: firebase.auth().currentUser.uid
         });
         this.id = data.id;
         const imgFile = this.$refs.blogPic.files[0];
@@ -174,8 +145,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

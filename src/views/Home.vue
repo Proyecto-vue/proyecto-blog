@@ -24,10 +24,17 @@
 
     <div id="principal">
       <div class="liston"></div>
-      <h1 class="fuente2">{{ user.name }}</h1>
+      <div v-for="blog in blogs" :key="blog.id">
+        <h1 class="fuente2">{{ blog.Title }}</h1>
+      </div>
+      <div v-for="blog in blogs" :key="blog.id" class="content">
+        <p class="fuente1">{{ blog.Content }}</p>
+      </div>
     </div>
     <div id="caja1" class="comments">
-      <h1 class="fuente1">Commments</h1>
+      <!-- <div v-for="blog in blogs" :key="blog.id" > -->
+      <!-- <p class="fuente1">{{ blog.Comment }}</p> -->
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -46,14 +53,14 @@ export default {
       user: {
         name: "",
         email: "",
-        uid: "",
+        uid: ""
       },
-      blogs: [],
+      blogs: []
     };
   },
   created() {
-    this.getBlogs();
     this.getUsuario();
+    this.getBlogs();
   },
   methods: {
     getUsuario() {
@@ -70,9 +77,11 @@ export default {
     async getBlogs() {
       try {
         // Obtener la lista de documentos.
+
         const result = await db
           .collection("blogs")
-          // .where("category", "==", "cocina italiana")
+          .where("userId", "==", this.user.uid)
+          .limit(1)
           .get();
 
         // Reiniciar arreglo de recetas.
@@ -80,23 +89,23 @@ export default {
 
         // Recorrer la lista para agregar la data
         // al arreglo local de recetas.
-        result.forEach((doc) => {
-          const r = doc.data();
-          r.id = doc.id;
+        result.forEach(blog => {
+          const r = blog.data();
+          r.id = blog.id;
 
           this.blogs.push(r);
         });
       } catch (error) {
         console.log(error);
       }
-    },
+    }
     /* computed: {
       // map `this.user` to `this.$store.getters.user`
       ...mapGetters({
         user: "user",
       }),
     }, */
-  },
+  }
 };
 </script>
 
@@ -113,6 +122,7 @@ export default {
   mix-blend-mode: normal;
   /*border-radius: 15px; */
   box-shadow: 4px 4px 18px rgba(0, 0, 0, 0.5);
+  overflow-y: scroll;
 }
 .liston {
   background: #ecececff;
@@ -121,6 +131,11 @@ export default {
   top: 0%;
   background-image: url("../assets/rect833.png");
 }
+
+.content {
+  text-align: left;
+}
+
 .comments {
   margin: auto;
   background: #ffffff;
