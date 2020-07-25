@@ -126,12 +126,14 @@ export default {
                 console.log( db.collection("blogs"));
                 let array = this.tagsList.split(',');
             this.tags= array;
+            const t = new Date();
                const data = await db.collection("blogs").add({
                     Title: this.title,
                     Content: this.content,
                     Tags: this.tags,
                     Category: this.category,
                     userId: firebase.auth().currentUser.uid,
+                    created:  t.toLocaleTimeString(),
                 })
                     this.id=data.id;
                     const imgFile = this.$refs.blogPic.files[0];
