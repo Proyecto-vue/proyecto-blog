@@ -136,7 +136,7 @@ export default {
                     this.id=data.id;
                     const imgFile = this.$refs.blogPic.files[0];
                     await storage.child("images/" + data.id + ".jpg").put(imgFile);
-                    
+                   this.$router.push({ path: `/view/${this.id}` })
             } catch (error) {
                 console.log(error);
             }
