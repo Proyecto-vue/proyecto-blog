@@ -1,8 +1,8 @@
 <template>
     <div class="blogEdit">
-        <div class="d-flex flex-row justify-content-center">
+        <div class="editCont mt-4">
 <!-- Make Post         -->
-        <div class="makePost col-7 mx-auto mt-4" v-if="this.Pshown!=true">
+        <div class="makePost col-7" v-if="this.Pshown!=true">
          <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">Title</span>
@@ -19,19 +19,8 @@
         <div class="input-group-prepend">
             <span class="input-group-text">Tags:</span>
         </div>
-        <input type="text" class="col-10" aria-label="Tags" placeholder="Separar, con, comas, cada, tag" v-model.lazy="tagsList"/>
-        </div>
-        <div class="input-group file-div">
-            <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroupFileAddon03" >Imagen</span>
-            </div>
-           <div class="custom-file">
-          <input id="inputGroupFile01" type="file" class="custom-file-input " lang="es" />
-          <label class="custom-file-label col-12 mr-2" for="inputGroupFile01"></label>
-        </div>
-        
-           
-        </div>
+        <input type="text" class="col-8" aria-label="Tags" placeholder="Separar, con, comas, cada, tag" v-model.lazy="tagsList"/>
+        </div>   
         <div class="input-group" >
         <div class="input-group-prepend">
             <span class="input-group-text">Category</span>
@@ -66,7 +55,7 @@
          </div>
       </div>
         <!-- Options  -->
-        <div class="btn-group-vertical col-2" role="group" aria-label="Options">
+        <div class="btngroup col" role="group" aria-label="Options">
         <button type="button" class="vue-btn-five" @click.prevent="showPreview"  v-if="this.Pshown!=true">Preview</button>
         <button type="button" class="vue-btn-five"  @click.prevent="showEdit"  v-if="this.Pshown!=false">Edit</button>
         <button type="button" class="vue-btn-five" @click.prevent="updateToDB">Post</button>
@@ -170,7 +159,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.editCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
 .showPreview{
     background-color: white;
     min-height: 40vh;
@@ -195,8 +190,36 @@ export default {
 }
 
 .vue-btn-five{
-    width: 15vw;
-    margin: 1em;
-    padding: 1em;
+    width: 25vw;
+    margin: 1em 0;
+    padding: 1em 0;
+}
+
+.btn-group{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 20vw;
+    }
+
+@media(max-width: 550px){
+    .editCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .btn-group{
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+
+    .vue-btn-five{
+    width: 50vw;
+    padding: 1em 0;
+}
 }
 </style>

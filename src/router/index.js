@@ -8,6 +8,7 @@ import UserLogIn from "@/views/user-login.vue";
 
 const BlogDetails = () => import("@/views/blog-details.vue");
 const BlogEdit = () => import("@/views/blog-edit.vue");
+const BlogImgEdit = () => import("@/views/blog-img-update.vue");
 const BlogTags = () => import("@/views/blog-tags.vue");
 
 Vue.use(VueRouter);
@@ -51,6 +52,15 @@ const routes = [
     name: "BlogEdit",
     props: true,
     component: BlogEdit,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
+    path: "/imgedit/:id",
+    name: "BlogImgEdit",
+    props: true,
+    component: BlogImgEdit,
     meta: {
       requiresAuth: true,
     },

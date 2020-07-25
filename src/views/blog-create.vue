@@ -1,8 +1,8 @@
 <template>
     <div class="blogCreate mt-4">
-        <div class="d-flex flex-row justify-content-center">
+        <div class="createCont  mt-4">
 <!-- Make Post         -->
-        <div class="makePost col-7 mt-4" v-if="this.Pshown!=true">
+        <div class="makePost col-7" v-if="this.Pshown!=true">
          <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">Title</span>
@@ -68,7 +68,7 @@
          </div>
       </div>
         <!-- Options  -->
-        <div class="btn-group-vertical col-2" role="group" aria-label="Options">
+        <div class="btngroup col" role="group" aria-label="Options">
         <button type="button" class="vue-btn-five" @click.prevent="showPreview"  v-if="this.Pshown!=true">Preview</button>
         <button type="button" class="vue-btn-five"  @click.prevent="showEdit"  v-if="this.Pshown!=false">Edit</button>
         <button type="button" class="vue-btn-five" @click.prevent="addToDB">Post</button>
@@ -147,7 +147,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.createCont{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
 .showPreview{
     background-color: white;
     min-height: 40vh;
@@ -155,9 +161,37 @@ export default {
 }
 
 .vue-btn-five{
-    margin-top:1em;
-    margin-left: 1em;
-    width:15vw;
+    width: 25vw;
+    margin: 1em 0;
+    padding: 1em 0;
+}
+
+.btn-group{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 20vw;
+    }
+
+@media(max-width: 550px){
+    .createCont{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    }
+
+    .btn-group{
+        display: flex;
+        justify-content: space-around;
+        margin: 0 auto;
+    }
+
+    .vue-btn-five{
+    width: 50vw;
+    padding: 1em 0;
+}
 }
 
 </style>
