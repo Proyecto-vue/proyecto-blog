@@ -1,26 +1,27 @@
 <template>
-  <div>
-    <div class="container text-left btnCont my-1">
+  <div id="app">
+    <div class="container text-left btnCont pt-3 mb-2">
       <button
         type="button"
         @click="hasHistory() 
         ? $router.go(-1) 
         : $router.push('/')"
-        class="btn btn-outline-success"
+        class="vue-btn-one"
       >
         &laquo;
         Back
       </button>
-      <router-link v-if="sameuser" :to="/edit/ + id" class="btn mx-1 btn-outline-success">Editar</router-link>
+      <router-link v-if="sameuser" :to="/edit/ + id" class="vue-btn-one m-2" >Editar</router-link>
       <router-link
         v-if="sameuser"
         :to="/imgedit/ + id"
-        class="btn btn-outline-success"
+        class="vue-btn-one"
       >Cambiar Imagen</router-link>
     </div>
 
     <div class="container mainContainer">
       <!-- Post -->
+  <div class="blogCont">
       <div class="main">
         <h1>{{ blogSelected.Title }}</h1>
         <br />
@@ -35,7 +36,7 @@
           </div>
         </div>
       </div>
-
+  </div>
       <!-- Sidebar -->
       <div class="sidebar">
         <div class="sidebarcont" v-for="blog in blogs" :key="blog.id">
@@ -126,21 +127,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#app{
+  background-image: url('../assets/background-web-1.png');
+  background-size: cover;
+}
+
 .mainContainer {
   display: flex;
   justify-content: center;
-  .main {
-    width: 60vw;
+  .main{
+    width:60vw;
+    background-color: #fff;
+   box-shadow: 1px 3px 5px #bbb;
+   height: auto;
+   border-radius: 1em;
   }
 }
-.main {
-  background-color: #fff;
-  box-shadow: 1px 3px 5px #bbb;
-}
+
 .sidebar {
   width: 15vw;
   margin-left: 5vw;
-  background-color: #f5f5f5;
   .h2 {
     text-shadow: 1px 2px 5px #bbb;
   }
