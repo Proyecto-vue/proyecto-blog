@@ -6,10 +6,11 @@ import Home from "@/views/Home.vue";
 const BlogGrid = () => import("@/views/blog-grid.vue");
 const BlogCreate = () => import("@/views/blog-create.vue");
 const UserLogIn = () => import("@/views/user-login.vue");
-const Registro = () => import("@/views/Registro.vue");
+const UserReg = () => import("@/views/Registro.vue");
 
 const BlogDetails = () => import("@/views/blog-details.vue");
 const BlogEdit = () => import("@/views/blog-edit.vue");
+const BlogImgEdit = () => import("@/views/blog-img-update.vue");
 const BlogTags = () => import("@/views/blog-tags.vue");
 
 Vue.use(Router);
@@ -67,6 +68,15 @@ const routes = [
     },
   },
   {
+    path: "/imgedit/:id",
+    name: "BlogImgEdit",
+    props: true,
+    component: BlogImgEdit,
+    meta: {
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/view/:id",
     name: "BlogDetails",
     props: true,
@@ -94,9 +104,9 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
-    path: "/Registro",
-    name: "Registro",
-    component: Registro,
+    path: "/Register",
+    name: "UserReg",
+    component: UserReg,
     meta: {
       requiresAuth: false,
     },

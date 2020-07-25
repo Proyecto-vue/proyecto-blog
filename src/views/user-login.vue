@@ -34,12 +34,7 @@
       <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
       <br />
       <br />
-      <button
-        type="button"
-        id="boton-registro"
-        class="btn btn-primary"
-        @click="$router.push('/Registro')"
-      >REGISTRARSE</button>
+      <router-link to="/register" class="btn btn-primary mx-1">Registrarse</router-link>
     </div>
   </form>
 </template>
@@ -80,17 +75,26 @@ export default {
   height: 50%;
 }
 
-.input-group-text {
-  background-color: rgb(169, 196, 255);
-  margin-left: 14%;
+.divContainer {
+  margin-top: 10vw;
 }
-
-.form-control {
-  margin-right: 4%;
-  left: 1.8%;
+.login {
+  background-color: #ffffff;
+  box-shadow: 1px 5px 5px #bbbbbb50;
+  max-width: 600px;
+  width: 80vw;
+  margin: 0 auto;
+  border-radius: 2em;
 }
-
 #boton-registro {
   background-color: rgb(79, 158, 0);
+}
+.lg-inside {
+  max-width: 500px;
+  width: 70vw;
+}
+
+#password {
+  width: 30vw;
 }
 </style>

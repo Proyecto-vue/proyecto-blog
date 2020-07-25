@@ -19,13 +19,13 @@ export default {
   name: "BlogTags",
   props: {
     tagSelected: {
-      type: String,
-    },
+      type: String
+    }
   },
   data() {
     return {
       blogs: [],
-      details: "",
+      details: ""
     };
   },
   created() {
@@ -33,7 +33,7 @@ export default {
     console.log(this.blogs);
   },
   components: {
-    "blog-card": blogCard,
+    "blog-card": blogCard
   },
   methods: {
     async getBlogs() {
@@ -42,7 +42,7 @@ export default {
           .collection("blogs")
           .where("Tags", "array-contains", this.tagSelected)
           .get();
-        res.forEach((blog) => {
+        res.forEach(blog => {
           const p = blog.data();
           p.id = blog.id;
           this.blogs.push(p);
@@ -50,8 +50,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

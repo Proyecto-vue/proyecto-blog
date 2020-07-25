@@ -7,9 +7,7 @@
       <br />
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="nombre" class="input-group-text" id="basic-addon3"
-            >Nombre</span
-          >
+          <span for="nombre" class="input-group-text" id="basic-addon3">Nombre</span>
         </div>
         <input
           type="text"
@@ -22,9 +20,7 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="email" class="input-group-text" id="basic-addon3"
-            >Email</span
-          >
+          <span for="email" class="input-group-text" id="basic-addon3">Email</span>
         </div>
         <input
           type="text"
@@ -37,9 +33,7 @@
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span for="password" class="input-group-text" id="passtext"
-            >password</span
-          >
+          <span for="password" class="input-group-text" id="passtext">password</span>
         </div>
         <input
           type="password"
@@ -50,17 +44,9 @@
         />
       </div>
       <br />
-      <button
-        type="button"
-        class="btn btn-primary"
-        @click="$router.push('/login')"
-      >
-        VOLVER
-      </button>
+      <button type="button" class="btn btn-primary" @click="$router.push('/login')">VOLVER</button>
       &emsp;&emsp;
-      <button type="button" class="btn btn-primary" @click="submit()">
-        TODO LISTO
-      </button>
+      <button type="button" class="btn btn-primary" @click="submit()">TODO LISTO</button>
     </div>
   </form>
 </template>
@@ -68,16 +54,16 @@
 <script>
 import firebase from "../common/firebase_setup";
 export default {
-  name: "Registro",
+  name: "UserReg",
   data() {
     return {
       form: {
         email: "",
         password: "",
-        nombre: "",
+        nombre: ""
       },
       error: null,
-      mensaje: null,
+      mensaje: null
     };
   },
   methods: {
@@ -85,19 +71,19 @@ export default {
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.form.email, this.form.password)
-        .then((data) => {
+        .then(data => {
           data.user
             .updateProfile({
-              displayName: this.form.name,
+              displayName: this.form.name
             })
             .then(() => {});
           this.mensaje = "Registrado exitosamente";
         })
-        .catch((err) => {
+        .catch(err => {
           this.error = err.message;
         });
-    },
-  },
+    }
+  }
 };
 </script>
 

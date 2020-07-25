@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 //import router from "../router/index";
 //import * as firebase from "..//common/firebase_setup";
+//const db = firebase.firestore();
 
 //import { firestore } from "firebase";
 
@@ -9,7 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    userProfile: {},
+    username: null,
     user: {
       data: null,
       name: "",
@@ -17,7 +18,7 @@ export default new Vuex.Store({
       password: "",
     },
     blogs: [],
-    likes: "",
+    likes: 0,
   },
   mutations: {
     setBlogs(state, val) {
@@ -28,12 +29,18 @@ export default new Vuex.Store({
       if (payload.uid == null) {
         return;
       }
-
       state.user = payload;
       state.user.data = payload;
     },
+    setUserName: (state, payload) => {
+      state.username = payload;
+    },
   },
   getters: {
+    likeUpdate(state) {
+      return (state.blogs.likes += 1);
+    },
+
     isAuthenticated(state) {
       state.user.data = state.user;
       return state.user != null;
