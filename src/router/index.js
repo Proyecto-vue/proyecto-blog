@@ -4,7 +4,7 @@ import Home from "../views/Home.vue";
 import BlogGrid from "../views/blog-grid.vue";
 import BlogCreate from "../views/blog-create.vue";
 import UserLogIn from "@/views/user-login.vue";
-
+import UserReg from "@/views/Registro.vue";
 
 const BlogDetails = () => import("@/views/blog-details.vue");
 const BlogEdit = () => import("@/views/blog-edit.vue");
@@ -26,6 +26,14 @@ const routes = [
     path: "/login",
     name: "UserLogIn",
     component: UserLogIn,
+    meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: "/register",
+    name: "UserReg",
+    component: UserReg,
     meta: {
       requiresAuth: false,
     },

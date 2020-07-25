@@ -15,7 +15,8 @@
             </div>
             <input type="password" name="password" id="password" aria-describedby="passtext" v-model="password">
             </div>
-            <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
+            <button type="button" class="btn btn-primary mx-1" @click.prevent="authenticate">LOGIN</button>
+            <router-link to="/register" class="btn btn-primary mx-1">Registrarse</router-link>
         </form>
         </div>
     </div>

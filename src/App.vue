@@ -24,7 +24,6 @@
     <div class="d-flex justify-content-between divNAV" id="navUser" v-if="isAuth==true">
       <div class="wp-title pl-2">
         <h3>{{username}}</h3>
-        <h3>{{this.username}}</h3>
       </div>
       <div class="nav-wrap">
     <ul class="nav nav-pills">
