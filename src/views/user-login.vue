@@ -1,6 +1,7 @@
 <template>
     <div class="divContainer">
-        <form class="col-7 mx-auto">
+        <div class="login py-1">
+        <form class="lg-inside mx-auto">
             <h1>Log-In</h1>
             <div class="input-group mb-3">
             <div class="input-group-prepend">
@@ -16,6 +17,7 @@
             </div>
             <button type="button" class="btn btn-primary" @click.prevent="authenticate">LOGIN</button>
         </form>
+        </div>
     </div>
 </template>
 
@@ -41,3 +43,27 @@ export default {
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.divContainer{
+    margin-top: 10vw;
+}
+.login{
+    background-color: #ffffff;
+    box-shadow: 1px 5px 5px #bbbbbb50;
+    max-width: 600px;
+    width: 80vw;
+    margin: 0 auto;
+    border-radius: 2em;
+
+    .lg-inside{
+        max-width: 500px;
+        width: 70vw;
+        
+    }
+
+    #password{
+        width:30vw;
+    }
+}
+</style>

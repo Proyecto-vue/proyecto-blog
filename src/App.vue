@@ -60,12 +60,11 @@ export default {
   data(){
     return{
       isAuth: false,
-      username:'',
+      username:'Blog-Vue',
     }
   },
   updated(){
     bsCustomFileInput.init()
-    this.getUser()
  },
   created(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -89,10 +88,7 @@ export default {
         console.log(error);
       }
     },
-    // getUser(){
-    //   var userDisplayName = firebase.auth().currentUser.displayName;
-    //   this.username = userDisplayName;
-    // }
+    
   }
 
 }
