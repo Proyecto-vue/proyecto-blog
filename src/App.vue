@@ -22,8 +22,9 @@
   </div>
 <!-- NAV-USER -->
     <div class="d-flex justify-content-between divNAV" id="navUser" v-if="isAuth==true">
-      <div class="wp-title pl-2">
-        <h3>{{username}}</h3>
+      <div class=" wp-title pl-2 mt-1">
+        <h4>{{username}}</h4>
+        <p></p>
       </div>
       <div class="nav-wrap">
     <ul class="nav nav-pills">
@@ -60,10 +61,22 @@ export default {
     return{
       isAuth: false,
       username:'Blog-Vue',
+
     }
   },
   updated(){
-    bsCustomFileInput.init()
+    bsCustomFileInput.init();
+
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.$store.commit("setUser",{ uid:user.uid})
+        this.$store.commit("setUserName",{ username:user.displayName})
+        this.username = firebase.auth().currentUser.displayName;
+        this.isAuth=true;
+      }else{
+        this.$store.commit("setUser",null)
+      }
+    })
  },
   created(){
     firebase.auth().onAuthStateChanged((user)=>{
@@ -78,10 +91,13 @@ export default {
     })
     
   },
+ 
   methods: {
     async logOut() {
       try {
         await firebase.auth().signOut();
+        this.$store.commit("setUser",null);
+        this.isAuth=false;
         this.$router.push({ name: "UserLogIn" });
       } catch (error) {
         console.log(error);
@@ -116,6 +132,11 @@ export default {
 
   .wp-title{
     margin: 0 auto;
+    padding-bottom: 0;
+    .h4{
+      padding: 0;
+      margin: 0;
+    }
   }
 
   .nav-wrap{
