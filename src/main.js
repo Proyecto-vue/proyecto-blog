@@ -7,6 +7,7 @@ import "bootstrap";
 import firebase from "./common/firebase_setup";
 import './styles/vue-global.scss'
 
+
 Vue.config.productionTip = false;
 
 
