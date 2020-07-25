@@ -24,6 +24,7 @@
     <div class="d-flex justify-content-between divNAV" id="navUser" v-if="isAuth==true">
       <div class="wp-title pl-2">
         <h3>{{username}}</h3>
+        <h3>{{this.username}}</h3>
       </div>
       <div class="nav-wrap">
     <ul class="nav nav-pills">
@@ -64,16 +65,20 @@ export default {
   },
   updated(){
     bsCustomFileInput.init()
+    this.getUser()
  },
   created(){
     firebase.auth().onAuthStateChanged((user)=>{
       if(user){
         this.$store.commit("setUser",{ uid:user.uid})
+        this.$store.commit("setUserName",{ username:user.displayName})
+        this.username = firebase.auth().currentUser.displayName;
         this.isAuth=true;
       }else{
         this.$store.commit("setUser",null)
       }
     })
+    
   },
   methods: {
     async logOut() {
@@ -84,15 +89,10 @@ export default {
         console.log(error);
       }
     },
-    getUser(){
-      var user = firebase.auth().currentUser;
-      var name;
-
-      if (user != null) {
-      name = user.displayName;
-      this.username= name;
-      }
-    }
+    // getUser(){
+    //   var userDisplayName = firebase.auth().currentUser.displayName;
+    //   this.username = userDisplayName;
+    // }
   }
 
 }
