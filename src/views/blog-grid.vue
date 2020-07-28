@@ -1,5 +1,5 @@
 <template>
-  <div class="fullContainer mt-2">
+  <div class="fullContainer mt-2" id="app">
     <div class="d-flex justify-content-space-around mx-auto col-10">
       <input
         type="text"
@@ -125,5 +125,40 @@ export default {
   width: 95vw;
   margin: 0 auto;
   margin-top: 2em;
+}
+
+#app{
+  background-image: url('../assets/background-web-3.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+}
+
+@media (max-width: 768px){
+#app{
+  width:100vw;
+  background-image: url('../assets/background-tablet-3.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+}
+
+@media (max-width: 400px) {
+
+  #app{
+  background-image: url('../assets/background-phone-3.png');
+  background-attachment: fixed;
+  
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 }
 </style>
