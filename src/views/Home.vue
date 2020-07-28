@@ -9,12 +9,16 @@
           <p class="fuente1">{{blog.Content }}</p>
         </div>
         <br />
-        <img src id="image" width="50%" class="foto" />
+        <div>
+          <img src="../assets/tape.png" id="tape" />
+          <img src id="image" width="50%" class="foto" />
+        </div>
       </div>
       <div id="caja1" class="comments">
         <ul id="ulcom">
           <li id="licom">
-            <a id="acom" @click="masLikes">LIKE {{ blog.Likes }}</a>
+            <a id="acom" @click="masLikes">LIKES {{ blog.Likes }}</a>
+            <button id="acom2" type="button" class="btn btn-outline-warning" @click="masLikes">LIKE</button>
           </li>
         </ul>
       </div>
@@ -50,11 +54,11 @@ export default {
     console.log(this.blogs.Title);
   },
 
-  /*computed: {
+  computed: {
     blogUnico() {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
-    } 
-  }, */
+    }
+  },
   methods: {
     getUsuario() {
       var user = firebase.auth().currentUser;
@@ -80,6 +84,7 @@ export default {
 
         const result = await db
           .collection("blogs")
+          .orderBy("createdOn", "desc")
 
           .limit(1)
           .get();
@@ -189,8 +194,17 @@ export default {
 }
 
 .foto {
-  position: relative;
-  left: 25%;
+  position: absolute;
+  left: 27%;
+}
+
+#tape {
+  position: absolute;
+  left: 46%;
+  width: 10%;
+  height: 7%;
+  z-index: 3;
+  transform: rotate(90deg);
 }
 
 #ulcom {
@@ -209,5 +223,15 @@ export default {
   top: 2%;
   left: 5%;
   font-size: 2rem;
+}
+
+#acom2 {
+  position: relative;
+  bottom: 33%;
+  left: 800%;
+  font-size: 1.5rem;
+  width: 100%;
+  height: 100%;
+  color: black;
 }
 </style>

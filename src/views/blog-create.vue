@@ -132,7 +132,8 @@ export default {
         console.log(db.collection("blogs"));
         let array = this.tagsList.split(",");
         this.tags = array;
-        const t = Date.now();
+        const t = new Date().toISOString();
+
         const data = await db.collection("blogs").add({
           Title: this.title,
           Content: this.content,
