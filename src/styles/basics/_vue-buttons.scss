@@ -1,14 +1,14 @@
 @import "./vue-variables";
-.vue-btn-one {
+.vue-btn-one{
   background-color: white;
   color: $color-one;
   border: solid 1px $color-two;
   padding: 1em;
   border-radius: 5px;
-  &:hover {
-    text-decoration: none;
-    color: white;
-    background-color: $color-two;
+  &:hover{
+      text-decoration: none;
+      color: white;
+      background-color: $color-two;
   }
 }
 
