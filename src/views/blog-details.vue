@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="mt-1">
     <div class="container text-left btnCont pt-3 mb-2">
       <button
         type="button"
@@ -134,6 +134,7 @@ export default {
 #app{
   background-image: url('../assets/background-web-2.png');
   background-attachment: fixed;
+  width: 100vw;
   
   background-size: cover;
   background-position: center;
@@ -190,18 +191,8 @@ export default {
   }
 }
 
-@media (max-width: 768px){
-#app{
-  width:100vw;
-  background-image: url('../assets/background-tablet-2.png');
-  background-attachment: fixed;
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-}
-@media (max-width: 400px) {
+
+@media (orientation: portrait) {
 
   #app{
   background-image: url('../assets/background-phone-2.png');

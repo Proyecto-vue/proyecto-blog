@@ -1,5 +1,5 @@
 <template>
-  <div class="blogCreate mt-4">
+  <div class="blogCreate" id="app">
     <div class="createCont mt-4">
       <!-- Make Post         -->
       <div class="makePost col-7" v-if="this.Pshown!=true">
@@ -181,6 +181,29 @@ export default {
   margin: 0 auto;
   max-width: 20vw;
 }
+
+#app{
+  background-image: url('../assets/background-web-4.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+@media (orientation:portrait) {
+  #app{
+  background-image: url('../assets/background-portrait-4.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+}
+
 @media (max-width: 550px) {
   .createCont {
     display: flex;
