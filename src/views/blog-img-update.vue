@@ -1,7 +1,7 @@
 <template>
-  <div class="app">
+  <div class="app" id="app">
     <div class="mainDiv col-10 mx-auto">
-      <div class="current-img col-7 mx-auto my-2">
+      <div class="current-img col-12 col-sm-12 col-md-7 mx-auto my-2">
         <img id="blogImg" class="col-12" />
       </div>
       <div class="custom-file">
@@ -74,3 +74,29 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+
+#app{
+  background-image: url('../assets/imgedit-web-1.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
+
+@media (orientation:portrait) {
+  #app{
+  background-image: url('../assets/imgedit-phone-1.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+}
+</style>

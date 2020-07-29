@@ -134,7 +134,7 @@ export default {
 #app{
   background-image: url('../assets/background-web-2.png');
   background-attachment: fixed;
-  width: 100vw;
+  
   
   background-size: cover;
   background-position: center;

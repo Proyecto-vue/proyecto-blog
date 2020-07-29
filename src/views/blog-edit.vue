@@ -1,5 +1,5 @@
 <template>
-  <div class="blogEdit">
+  <div class="blogEdit" id="app">
     <div class="editCont mt-4">
       <!-- Make Post         -->
       <div class="makePost col-7" v-if="this.Pshown!=true">
@@ -168,6 +168,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+
+#app{
+  background-image: url('../assets/background-web-4.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
 .editCont {
   display: flex;
   flex-direction: row;
@@ -205,6 +216,20 @@ export default {
   margin: 0 auto;
   max-width: 20vw;
 }
+
+
+@media (orientation:portrait) {
+  #app{
+  background-image: url('../assets/background-portrait-4.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+}
+
 @media (max-width: 550px) {
   .editCont {
     display: flex;

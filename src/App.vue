@@ -43,7 +43,10 @@
       </div>
     </div>
 
+  <div id="content">
+
     <router-view :key="$route.fullPath" />
+  </div>
   </div>
 </template>
 

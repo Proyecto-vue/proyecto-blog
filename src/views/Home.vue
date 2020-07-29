@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="cont">
     <div v-for="blog in blogs" :key="blog.id">
       <div id="principal">
         <div class="liston"></div>
@@ -146,6 +146,18 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
 
+
+#cont{
+  min-height: 100vh;
+  margin-top: 2px;
+  background-image: url('../assets/inicio-2-web.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
 #contenedor {
   min-height: 100%;
 }
@@ -255,5 +267,17 @@ export default {
   bottom: 0%;
   height: 100%;
   color: black;
+}
+
+@media (orientation: portrait) {
+
+  #cont{
+  background-image: url('../assets/inicio-2-phone.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 }
 </style>

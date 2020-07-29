@@ -1,4 +1,5 @@
 <template>
+<div id="cont">
   <form>
     <div id="caja3" class="comments">
       <div v-if="error" class="alert alert-danger">{{ error }}</div>
@@ -49,6 +50,7 @@
       <button type="button" class="btn btn-primary" @click="submit()">TODO LISTO</button>
     </div>
   </form>
+</div>
 </template>
 
 <script>
@@ -88,11 +90,38 @@ export default {
 </script>
 
 <style>
+
+#cont{
+  min-height: 100vh;
+  margin-top: 2px;
+  background-image: url('../assets/background-web-6.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat; 
+}
+
+
+
 #caja3 {
-  position: absolute;
   width: 40%;
   height: 50%;
+  position: absolute;
   top: 15%;
-  left: 33%;
+  left: 33%; 
+}
+
+
+@media (orientation: portrait) {
+
+  #cont{
+  background-image: url('../assets/background-phone-6.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 }
 </style>
