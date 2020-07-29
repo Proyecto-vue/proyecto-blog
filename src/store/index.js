@@ -35,10 +35,16 @@ export default new Vuex.Store({
     setUserName: (state, payload) => {
       state.username = payload;
     },
+    updateLike(payload) {
+      if (payload == null) {
+        return;
+      } else console.log("perrro");
+      this.state.likes += 1;
+    },
   },
   getters: {
-    likeUpdate(state) {
-      return (state.blogs.likes += 1);
+    likeCount() {
+      return this.state.likes;
     },
 
     isAuthenticated(state) {
@@ -54,6 +60,10 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    updateLike(payload) {
+      this.commit("updateLike", payload);
+    },
+
     /* async signup({ dispatch }, form) {
       // sign user up
       const { user } = await firebase.auth.createUserWithEmailAndPassword(
@@ -89,8 +99,7 @@ export default new Vuex.Store({
       commit("setUserProfile", userProfile.data());
 
       // change route to dashboard
-      router.push("/");
-    }, */
+      router.push("/"); */
   },
   modules: {},
 });

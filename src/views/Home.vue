@@ -6,7 +6,7 @@
 
         <h1 class="fuente2">{{ blog.Title }}</h1>
         <div class="content">
-          <p class="fuente1">{{blog.Content }}</p>
+          <p class="fuente1">{{ blog.Content }}</p>
         </div>
         <br />
         <div>
@@ -17,7 +17,7 @@
       <div id="caja1" class="comments">
         <ul id="ulcom">
           <li id="licom">
-            <a id="acom" @click="masLikes">LIKES {{ blog.Likes }}</a>
+            <a id="acom" @click="masLikes">LIKES {{ likes }}</a>
             <button id="acom2" type="button" class="btn btn-outline-warning" @click="masLikes">LIKE</button>
           </li>
         </ul>
@@ -45,7 +45,9 @@ export default {
         uid: ""
       },
       blogs: [],
-      limit: 1
+      limit: 1,
+      likes: 0,
+      id: null
     };
   },
   created() {
@@ -73,9 +75,26 @@ export default {
     /*blogUnicox() {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
     }, */
-
     masLikes() {
-      this.blogs.Likes = this.$store.getters.likeUpdate;
+      this.$store.dispatch("updateLike", this.user.uid);
+      this.likes = this.$store.state.likes;
+      db.collection("blogs")
+        .doc(this.id)
+        .update({ Likes: this.likes });
+    },
+    async getLikes(id) {
+      console.log("estaa", id);
+      try {
+        const ref = await db
+          .collection("blogs")
+          .doc(id)
+
+          .get();
+
+        this.likes = ref.Likes;
+      } catch (error) {
+        console.log(error);
+      }
     },
 
     async getBlogs() {
@@ -98,7 +117,10 @@ export default {
           console.log(blog.id);
           r.id = blog.id;
           this.getImage(blog.id);
+          this.getLikes(blog.id);
+          this.id = blog.id;
           this.blogs.push(r);
+          return r.id;
         });
       } catch (error) {
         console.log(error);
@@ -226,11 +248,11 @@ export default {
 }
 
 #acom2 {
-  position: relative;
-  bottom: 33%;
-  left: 800%;
+  position: absolute;
+  bottom: 38%;
+  left: 85%;
   font-size: 1.5rem;
-  width: 100%;
+  bottom: 0%;
   height: 100%;
   color: black;
 }
