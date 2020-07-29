@@ -73,7 +73,7 @@ const routes = [
     props: true,
     component: BlogDetails,
     meta: {
-      requiresAuth: true,
+      public: true,
     },
   },
   {
@@ -82,7 +82,7 @@ const routes = [
     props: true,
     component: BlogTags,
     meta: {
-      requiresAuth: true,
+      public: true,
     },
   },
   {

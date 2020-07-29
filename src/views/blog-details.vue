@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="mt-1">
     <div class="container text-left btnCont pt-3 mb-2">
       <button
         type="button"
@@ -19,16 +19,18 @@
       >Cambiar Imagen</router-link>
     </div>
 
-    <div class="container mainContainer">
+    <div class=" mainContainer">
       <!-- Post -->
   <div class="blogCont">
       <div class="main">
         <h1>{{ blogSelected.Title }}</h1>
         <br />
         <div class="imageDiv">
-          <img id="blogImg" class="col-12" />
+          <img id="blogImg" class="col-12 mb-1" />
         </div>
+        <div class="text">
         <p>{{ blogSelected.Content }}</p>
+        </div>
         <br />
         <div class="d-flex flex-row justify-content-center">
           <div class="tagList m-1" v-for="tagSelected in blogSelected.Tags" :key="tagSelected.id">
@@ -91,10 +93,12 @@ export default {
           .catch(function() {
             console.log("No image");
           });
+
+           this.getSimilarBlogs();
         if (firebase.auth().currentUser.uid == this.blogSelected.userId) {
           this.sameuser = true;
         }
-        this.getSimilarBlogs();
+       
       } catch (error) {
         console.log(error);
       }
@@ -128,8 +132,13 @@ export default {
 
 <style lang="scss" scoped>
 #app{
-  background-image: url('../assets/background-web-1.png');
+  background-image: url('../assets/background-web-2.png');
+  background-attachment: fixed;
+  width: 100vw;
+  
   background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .mainContainer {
@@ -141,6 +150,15 @@ export default {
    box-shadow: 1px 3px 5px #bbb;
    height: auto;
    border-radius: 1em;
+
+  .text{
+    margin-top: 2em;
+    margin: 0 auto;
+     width: 90%;
+  }
+  p{
+    margin-top: 1em;
+  }
   }
 }
 
@@ -172,7 +190,19 @@ export default {
     }
   }
 }
-@media (max-width: 400px) {
+
+
+@media (orientation: portrait) {
+
+  #app{
+  background-image: url('../assets/background-phone-2.png');
+  background-attachment: fixed;
+  
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
   .btnCont {
     display: flex;
     justify-content: center;
@@ -180,8 +210,10 @@ export default {
   .mainContainer {
     flex-direction: column;
     justify-content: center;
+    margin-left: 0;
     .main {
       width: 95vw;
+      margin-left: 0;
       margin: 0 auto;
     }
     .sidebar {
