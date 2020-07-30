@@ -17,7 +17,8 @@
       <div id="caja1" class="comments">
         <ul id="ulcom">
           <li id="licom">
-            <a id="acom" @click="masLikes">LIKES {{ likes }}</a>
+            <a id="acom" @click="masLikes">LIKES {{ $store.state.likes }}</a>
+
             <button id="acom2" type="button" class="btn btn-outline-warning" @click="masLikes">LIKE</button>
           </li>
         </ul>
@@ -53,9 +54,13 @@ export default {
   created() {
     this.getUsuario();
     this.getBlogs();
+
     console.log(this.blogs.Title);
   },
 
+  mounted() {
+    this.getLikes();
+  },
   computed: {
     blogUnico() {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
@@ -76,25 +81,12 @@ export default {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
     }, */
     masLikes() {
-      this.$store.dispatch("updateLike", this.user.uid);
-      this.likes = this.$store.state.likes;
-      db.collection("blogs")
-        .doc(this.id)
-        .update({ Likes: this.likes });
+      console.log("helem", this.id);
+      this.$store.commit("updateLikeMu", this.id);
     },
-    async getLikes(id) {
-      console.log("estaa", id);
-      try {
-        const ref = await db
-          .collection("blogs")
-          .doc(id)
-
-          .get();
-
-        this.likes = ref.Likes;
-      } catch (error) {
-        console.log(error);
-      }
+    /*async*/ getLikes() {
+      this.$store.dispatch("getLikes", this.id);
+      console.log("el de getlikes", this.id);
     },
 
     async getBlogs() {
@@ -146,16 +138,15 @@ export default {
 <style>
 @import url("https://fonts.googleapis.com/css2?family=Sora:wght@300&display=swap");
 
-
-#cont{
+#cont {
   min-height: 100vh;
   margin-top: 2px;
-  background-image: url('../assets/inicio-2-web.png');
+  background-image: url("../assets/inicio-2-web.png");
   background-attachment: fixed;
-  
+
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 #contenedor {
@@ -182,6 +173,7 @@ export default {
   top: 0%;
   background-image: url("../assets/rect833.png");
   position: sticky;
+  z-index: 3;
 }
 
 .content {
@@ -237,7 +229,7 @@ export default {
   left: 46%;
   width: 10%;
   height: 7%;
-  z-index: 3;
+  z-index: 2;
   transform: rotate(90deg);
 }
 
@@ -270,14 +262,13 @@ export default {
 }
 
 @media (orientation: portrait) {
+  #cont {
+    background-image: url("../assets/inicio-2-phone.png");
+    background-attachment: fixed;
 
-  #cont{
-  background-image: url('../assets/inicio-2-phone.png');
-  background-attachment: fixed;
-  
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 }
 </style>
