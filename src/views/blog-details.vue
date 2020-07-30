@@ -28,9 +28,7 @@
         <div class="imageDiv">
           <img id="blogImg" class="col-12 mb-1" />
         </div>
-        <div class="text">
-        <p>{{ blogSelected.Content }}</p>
-        </div>
+        <div id="blogContents"></div>
         <br />
         <div class="d-flex flex-row justify-content-center">
           <div class="tagList m-1" v-for="tagSelected in blogSelected.Tags" :key="tagSelected.id">
@@ -94,6 +92,10 @@ export default {
             console.log("No image");
           });
 
+            var selectedContent = this.blogSelected.Content;
+            var divcont =  document.getElementById('blogContents');
+            divcont.innerHTML = selectedContent;
+            
            this.getSimilarBlogs();
         if (firebase.auth().currentUser.uid == this.blogSelected.userId) {
           this.sameuser = true;
@@ -151,7 +153,7 @@ export default {
    height: auto;
    border-radius: 1em;
 
-  .text{
+  .blogContents{
     margin-top: 2em;
     margin: 0 auto;
      width: 90%;

@@ -2,19 +2,29 @@
   <div class="blogCreate" id="app">
     <div class="createCont mt-4">
       <!-- Make Post         -->
-      <div class="makePost col-7" v-if="this.Pshown!=true">
+      <div class="makePost col-7" >
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Title</span>
           </div>
           <input type="text" aria-label="Title" v-model.lazy="title" />
         </div>
-        <div class="input-group">
-          <div class="input-group-prepend">
-            <span class="input-group-text">Content</span>
-          </div>
-          <textarea class="form-control" aria-label="Content" v-model.lazy="content"></textarea>
-        </div>
+
+        <editor  v-model.lazy="content"
+  apiKey="aftbzd3py9wntvoamg0m410kozo88q8pzln23svefwl1gm3v"
+    initialValue="<p>CONTENT</p>"
+    :init="{
+      height: 300,
+      menubar: false,
+      plugins: [
+         'lists link image paste help wordcount'
+      ],
+      toolbar:
+        'undo redo | formatselect | bold italic | \
+        alignleft aligncenter alignright | \
+        bullist numlist outdent indent | help'
+    }"/>
+
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Tags:</span>
@@ -47,40 +57,9 @@
         <!--End of Create Blog -->
       </div>
 
-      <div
-        class="showPreview d-flex flex-column justify-content-center col-7"
-        v-if="this.Pshown!=false"
-      >
-        <div class="title">
-          <h1>{{title}}</h1>
-        </div>
-        <div class="imageDiv">
-          <img id="blogImg" class="col-12" />
-        </div>
-        <div class="content">
-          <p>{{content}}</p>
-        </div>
-        <div class="tags">
-          <p>{{tagsList}}</p>
-        </div>
-        <div class="category">
-          <p>{{category}}</p>
-        </div>
-      </div>
+     
       <!-- Options  -->
       <div class="btngroup col" role="group" aria-label="Options">
-        <button
-          type="button"
-          class="vue-btn-five"
-          @click.prevent="showPreview"
-          v-if="this.Pshown!=true"
-        >Preview</button>
-        <button
-          type="button"
-          class="vue-btn-five"
-          @click.prevent="showEdit"
-          v-if="this.Pshown!=false"
-        >Edit</button>
         <button type="button" class="vue-btn-five" @click.prevent="addToDB">Post</button>
       </div>
     </div>
@@ -89,11 +68,15 @@
 
 
 <script>
+import Editor from '@tinymce/tinymce-vue'
 import firebase from "@/common/firebase_setup";
 const storage = firebase.storage().ref();
 const db = firebase.firestore();
 export default {
   name: "BlogCreate",
+  components: {
+      editor: Editor
+    },
   data() {
     return {
       title: "",
@@ -102,31 +85,11 @@ export default {
       id: "",
       tags: [],
       category: "",
-      Pshown: false,
-      Eshown: true
     };
   },
 
   methods: {
-    showPreview() {
-      if (
-        this.title != "" &&
-        this.content != "" &&
-        this.tagsList != "" &&
-        this.category != ""
-      ) {
-        let array = this.tagsList.split(",");
-        this.tags = array;
-
-        this.Pshown = true;
-      } else {
-        alert("Please fill everything.");
-      }
-    },
-    showEdit() {
-      this.Eshown = true;
-      this.Pshown = false;
-    },
+    
     async addToDB() {
       try {
         console.log(db.collection("blogs"));
