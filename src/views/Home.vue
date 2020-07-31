@@ -6,7 +6,8 @@
 
         <h1 class="fuente2">{{ blog.Title }}</h1>
         <div class="content">
-          <p class="fuente1">{{ blog.Content }}</p>
+          <!--Content -->
+        <div id="blogContents"></div>
         </div>
         <br />
         <div>
@@ -54,10 +55,15 @@ export default {
   created() {
     this.getUsuario();
     this.getBlogs();
-
+    console.log(this.blogs);
+    
+  },
+  updated(){
+    var selectedContent =this.blogs[0].Content;
+    var divcont =  document.getElementById('blogContents');
+    divcont.innerHTML = selectedContent;
     console.log(this.blogs.Title);
   },
-
   mounted() {
     this.getLikes();
   },
@@ -96,7 +102,6 @@ export default {
         const result = await db
           .collection("blogs")
           .orderBy("createdOn", "desc")
-
           .limit(1)
           .get();
 
