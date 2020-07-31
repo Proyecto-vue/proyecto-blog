@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 //import router from "../router/index";
-//import * as firebase from "..//common/firebase_setup";
-//const db = firebase.firestore();
+import firebase from "../common/firebase_setup";
+const db = firebase.firestore();
 
 //import { firestore } from "firebase";
 
@@ -35,11 +35,47 @@ export default new Vuex.Store({
     setUserName: (state, payload) => {
       state.username = payload;
     },
-    updateLike(payload) {
+    updateLikeMu(state, payload) {
       if (payload == null) {
         return;
-      } else console.log("perrro");
-      this.state.likes += 1;
+      } //console.log("perrro");
+      else state.likes += 1;
+      console.log("cautnos", state.likes);
+      // this.$store.dispatch("updateLike", this.user.uid);
+      // this.likes = this.$store.state.likes;
+      db.collection("blogs")
+        .doc(payload)
+        .update({ Likes: state.likes });
+    },
+    getLikesMu(state, payload) {
+      db.collection("blogs")
+        .doc(payload.idblog)
+        .get()
+        .then((doc) => {
+          if (!doc.exists) {
+            console.log("No such document!");
+          } else {
+            console.log("Document data:", doc.data().Likes);
+            state.likes = doc.data().Likes;
+            console.log("state likess:", payload.idblog, payload.idusu);
+          }
+        })
+        .catch((err) => {
+          console.log("Error getting document", err);
+        });
+
+      /*  db.collection('users').doc('id').get()
+  .then((docSnapshot) => {
+    if (docSnapshot.exists) {
+        db.collection("users")
+
+          .add({ likedBlogs: payload.idblog, userId: payload.idusu })
+          .catch((err) => {
+            console.log("Error getting document", err);
+          });
+        }else{}
+
+  } */
     },
   },
   getters: {
@@ -60,8 +96,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    updateLike(payload) {
-      this.commit("updateLike", payload);
+    updateLike({ commit }, payload) {
+      commit("updateLikeMu", payload);
+    },
+
+    getLikes({ commit }, payload) {
+      commit("getLikesMu", payload);
     },
 
     /* async signup({ dispatch }, form) {
