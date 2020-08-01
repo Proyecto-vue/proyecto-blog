@@ -2,7 +2,7 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 import "firebase/storage";
-import store from "../store";
+//import store from "../store";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCzg64NNzxQS0Fs5eSxUNPIZnvHxweNPyY",
@@ -16,7 +16,7 @@ const firebaseConfig = {
 
 export default firebase.initializeApp(firebaseConfig);
 
-firebase.auth().onAuthStateChanged((user) => {
+/*firebase.auth().onAuthStateChanged((user) => {
   store.dispatch("fetchUser", user);
 });
 
@@ -39,3 +39,4 @@ export {
   commentsCollection,
   likesCollection,
 };
+*/

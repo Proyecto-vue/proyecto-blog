@@ -1,7 +1,15 @@
 <template>
   <div id="cont">
+    <div class="comments" id="bienve">
+      <H1 class="fuente3">Bienvenido/a {{ this.user.name }}</H1>
+    </div>
+    <br />
+
     <div v-for="blog in blogs" :key="blog.id">
       <div id="principal">
+        <div id="ribbon">
+          <p class="fuente4">ULTIMO POST</p>
+        </div>
         <div class="liston"></div>
 
         <h1 class="fuente2">{{ blog.Title }}</h1>
@@ -10,7 +18,7 @@
         </div>
         <br />
         <div>
-          <img src="../assets/tape.png" id="tape" />
+          <img v-if="image == true" src="../assets/tape.png" id="tape" />
           <img src id="image" width="50%" class="foto" />
         </div>
       </div>
@@ -19,7 +27,14 @@
           <li id="licom">
             <a id="acom" @click="masLikes">LIKES {{ $store.state.likes }}</a>
 
-            <button id="acom2" type="button" class="btn btn-outline-warning" @click="masLikes">LIKE</button>
+            <button
+              id="acom2"
+              type="button"
+              class="btn btn-outline-warning"
+              @click="masLikes"
+            >
+              LIKE
+            </button>
           </li>
         </ul>
       </div>
@@ -43,28 +58,28 @@ export default {
       user: {
         name: "",
         email: "",
-        uid: ""
+        uid: "",
       },
       blogs: [],
       limit: 1,
       likes: 0,
-      id: null
+      id: null,
+      image: false,
     };
   },
   created() {
-    this.getUsuario();
     this.getBlogs();
-
-    console.log(this.blogs.Title);
   },
 
-  mounted() {
+  updated() {
+    this.getUsuario();
     this.getLikes();
+    console.log("uhuuu", this.id, this.user.uid);
   },
   computed: {
     blogUnico() {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
-    }
+    },
   },
   methods: {
     getUsuario() {
@@ -72,9 +87,7 @@ export default {
       if (user != null) {
         this.user.name = user.displayName;
         this.user.email = user.email;
-        this.user.uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
+        this.user.uid = user.uid;
       }
     },
     /*blogUnicox() {
@@ -82,10 +95,14 @@ export default {
     }, */
     masLikes() {
       console.log("helem", this.id);
-      this.$store.commit("updateLikeMu", this.id);
+      const usuLike = { idblog: this.id, idusu: this.user.uid };
+      this.$store.dispatch("updateLike", usuLike);
+      document.getElementById("acom2").disabled = true;
     },
-    /*async*/ getLikes() {
-      this.$store.dispatch("getLikes", this.id);
+    async getLikes() {
+      await (this.id != null);
+      const usuLike = { idblog: this.id, idusu: this.user.uid };
+      this.$store.dispatch("getLikes", usuLike);
       console.log("el de getlikes", this.id);
     },
 
@@ -104,12 +121,13 @@ export default {
 
         // Recorrer la lista para agregar la data
         // al arreglo local de recetas.
-        result.forEach(blog => {
+        result.forEach((blog) => {
           const r = blog.data();
-          console.log(blog.id);
+
           r.id = blog.id;
           this.getImage(blog.id);
           this.getLikes(blog.id);
+          console.log("el id es", blog.id, this.user.uid);
           this.id = blog.id;
           this.blogs.push(r);
           return r.id;
@@ -123,15 +141,15 @@ export default {
         const url = await storage
           .child("images/" + id + ".jpg")
           .getDownloadURL();
-
+        this.image = true;
         const image = document.getElementById("image");
         image.src = url;
         console.log(url);
       } catch (error) {
         console.log(error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -149,6 +167,16 @@ export default {
   background-repeat: no-repeat;
 }
 
+#bienve {
+  position: absolute;
+  top: 6%;
+  left: 25%;
+  width: 50%;
+  background-color: rgb(64, 189, 178);
+  text-align: top;
+  padding: 2%;
+}
+
 #contenedor {
   min-height: 100%;
 }
@@ -158,7 +186,7 @@ export default {
   width: 79%;
   height: 80%;
   left: 10%;
-  top: 9%;
+  top: 17%;
   margin: auto;
   background: #ffffff;
   mix-blend-mode: normal;
@@ -170,7 +198,7 @@ export default {
   background: #ecececff;
   width: 100%;
   height: 5%;
-  top: 0%;
+
   background-image: url("../assets/rect833.png");
   position: sticky;
   z-index: 3;
@@ -192,7 +220,7 @@ export default {
 #caja1 {
   position: absolute;
   left: 10%;
-  top: 92%;
+  top: 99%;
   width: 79%;
   height: 5%;
 }
@@ -206,6 +234,20 @@ export default {
 .fuente2 {
   font-family: "Sora", sans-serif;
   font-size: 2rem;
+}
+
+.fuente3 {
+  font-family: "Sora", sans-serif;
+  font-size: 4rem;
+}
+
+.fuente4 {
+  font-family: "Sora", sans-serif;
+  font-size: 1.5rem;
+  color: #333;
+  text-align: center;
+  position: relative;
+  top: 50%;
 }
 
 #fuenteFav {
@@ -270,5 +312,24 @@ export default {
     background-position: center;
     background-repeat: no-repeat;
   }
+}
+
+#ribbon {
+  font: bold 15px sans-serif;
+  color: #333;
+  text-align: center;
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -ms-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  position: absolute;
+  padding: 7px 0;
+  top: 34px;
+  left: -68px;
+  width: 250px;
+  height: 60px;
+  background-color: #ebb134;
+  color: #fff;
+  z-index: 4;
 }
 </style>

@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 //import router from "../router/index";
 import firebase from "../common/firebase_setup";
+//import { firestore } from "firebase";
 const db = firebase.firestore();
 
 //import { firestore } from "firebase";
@@ -36,16 +37,42 @@ export default new Vuex.Store({
       state.username = payload;
     },
     updateLikeMu(state, payload) {
+      const update = {};
+      update[`favorites.${payload.idblog}`] = payload.idusu;
+
       if (payload == null) {
         return;
-      } //console.log("perrro");
-      else state.likes += 1;
+      } else state.likes += 1;
       console.log("cautnos", state.likes);
-      // this.$store.dispatch("updateLike", this.user.uid);
-      // this.likes = this.$store.state.likes;
+
       db.collection("blogs")
-        .doc(payload)
+        .doc(payload.idblog)
         .update({ Likes: state.likes });
+
+      let likeado = db
+        .collection("users")
+        .where("user", "==", payload.idusu)
+        .get()
+        .then((snapshot) => {
+          if (snapshot.empty) {
+            db.collection("users")
+              .doc(payload.idusu)
+              .set({
+                update,
+                user: payload.idusu,
+              });
+
+            console.log("No matching documents.");
+            return;
+          } else
+            db.collection("users")
+              .doc(payload.idusu)
+
+              .update(update)
+              .catch((err) => {
+                console.log("Error getting documents", err, likeado);
+              });
+        });
     },
     getLikesMu(state, payload) {
       db.collection("blogs")
