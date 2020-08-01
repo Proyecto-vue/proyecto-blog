@@ -1,3 +1,4 @@
+
 <template>
   <div id="cont">
     <div class="comments" id="bienve">
@@ -14,7 +15,7 @@
 
         <h1 class="fuente2">{{ blog.Title }}</h1>
         <div class="content">
-          <p class="fuente1">{{ blog.Content }}</p>
+          <div id="blogContents"></div>
         </div>
         <br />
         <div>
@@ -27,14 +28,7 @@
           <li id="licom">
             <a id="acom" @click="masLikes">LIKES {{ $store.state.likes }}</a>
 
-            <button
-              id="acom2"
-              type="button"
-              class="btn btn-outline-warning"
-              @click="masLikes"
-            >
-              LIKE
-            </button>
+            <button id="acom2" type="button" class="btn btn-outline-warning" @click="masLikes">LIKE</button>
           </li>
         </ul>
       </div>
@@ -58,13 +52,13 @@ export default {
       user: {
         name: "",
         email: "",
-        uid: "",
+        uid: ""
       },
       blogs: [],
       limit: 1,
       likes: 0,
       id: null,
-      image: false,
+      image: false
     };
   },
   created() {
@@ -72,6 +66,9 @@ export default {
   },
 
   updated() {
+    var selectedContent = this.blogs[0].Content;
+    var divcont = document.getElementById("blogContents");
+    divcont.innerHTML = selectedContent;
     this.getUsuario();
     this.getLikes();
     console.log("uhuuu", this.id, this.user.uid);
@@ -79,7 +76,7 @@ export default {
   computed: {
     blogUnico() {
       return this.limit ? this.blogs.slice(0, this.limit) : this.blog;
-    },
+    }
   },
   methods: {
     getUsuario() {
@@ -121,7 +118,7 @@ export default {
 
         // Recorrer la lista para agregar la data
         // al arreglo local de recetas.
-        result.forEach((blog) => {
+        result.forEach(blog => {
           const r = blog.data();
 
           r.id = blog.id;
@@ -148,8 +145,8 @@ export default {
       } catch (error) {
         console.log(error);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 
@@ -333,3 +330,4 @@ export default {
   z-index: 4;
 }
 </style>
+
